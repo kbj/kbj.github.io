@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-cn" >
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  
+  <meta name="author"
+        content="WeiKai"/>
+
+  
+  <meta name="description" content="公司的项目使用到了存储过程，由于此前在学校从未接触到这一方面，因此记录下学习笔记。 什么是存储过程 存储过程（Stored Procedure）是在大型数据库系统中，一组为了完成特定功能的SQL 语句集，存储"/>
+  
+
+  
+  
+  <meta name="keywords" content="WeiKai, Blog"/>
+  
+
+  
+  <link rel="canonical" href="https://blog.weikai.me/posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+
+  
+
+  <title>存储过程学习笔记 &middot; WeiKai&#39;s Blog</title>
+
+  <link rel="shortcut icon" href="https://blog.weikai.me/images/favicon.ico"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/animate.min.css"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/remixicon.css"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/zozo.css"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/highlight.css"/>
+
+  
+  
+</head>
+
+<body>
+<div class="main animated">
+  <div class="nav_container animated fadeInDown">
+  <div class="site_nav" id="site_nav">
+    <ul>
+      
+      <li>
+        <a href="/">首页</a>
+      </li>
+      
+      <li>
+        <a href="/posts/">归档</a>
+      </li>
+      
+      <li>
+        <a href="/tags/">标签</a>
+      </li>
+      
+      <li>
+        <a href="/about/">关于</a>
+      </li>
+      
+    </ul>
+  </div>
+  <div class="menu_icon">
+    <a id="menu_icon"><i class="remixicon-links-line"></i></a>
+  </div>
+</div>
+
+  <div class="header animated fadeInDown">
+  <div class="site_title_container">
+    <div class="site_title">
+      <h1>
+        <a href="https://blog.weikai.me/">
+          <span>WeiKai&#39;s Blog</span>
+          <img src="https://blog.weikai.me/images/logo.svg"/>
+        </a>
+      </h1>
+    </div>
+    <div class="description">
+      <p class="sub_title"></p>
+      <div class="my_socials">
+        
+        
+        <a href="%20" title="facebook" target="_blank"><i class="remixicon-facebook-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="github" target="_blank"><i class="remixicon-github-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="instagram" target="_blank"><i class="remixicon-instagram-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="twitter" target="_blank"><i class="remixicon-twitter-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="weibo" target="_blank"><i class="remixicon-weibo-fill"></i></a>
+        
+        
+        <a href="https://blog.weikai.me/index.xml" type="application/rss+xml" title="rss" target="_blank"><i class="remixicon-rss-fill"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="content">
+    <div class="post_page">
+      <div class="post animated fadeInDown">
+        <div class="post_title post_detail_title">
+          <h2><a href='/posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>存储过程学习笔记</a></h2>
+          <span class="date">2018.09.04</span>
+        </div>
+        <div class="post_content markdown">
+
+<p>公司的项目使用到了存储过程，由于此前在学校从未接触到这一方面，因此记录下学习笔记。</p>
+
+<!-- more -->
+
+<h1 id="什么是存储过程">什么是存储过程</h1>
+
+<p>存储过程（Stored Procedure）是在大型数据库系统中，一组为了完成特定功能的SQL 语句集，存储在数据库中，经过第一次编译后再次调用不需要再次编译，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它。</p>
+
+<h1 id="使用存储过程的优点">使用存储过程的优点</h1>
+
+<ol>
+<li><p>存储过程只在创造时进行编译，以后每次执行存储过程都不需再重新编译，而一般SQL语句每执行一次就编译一次,所以使用存储过程可提高数据库执行速度。</p></li>
+
+<li><p>当对数据库进行复杂操作时，可将此复杂操作用存储过程封装起来与数据库提供的事务处理结合一起使用。</p></li>
+
+<li><p>存储过程可以重复使用,可减少数据库开发人员的工作量。</p></li>
+
+<li><p>安全性高,可设定只有某些用户才具有对指定存储过程的使用权。</p></li>
+</ol>
+
+<h1 id="简单例子">简单例子</h1>
+
+<h2 id="基本语法">基本语法</h2>
+
+<pre><code class="language-sql">--------------创建存储过程-----------------
+CREATE [OR REPLACE] PROCEDURE procedure_name(参数列表) 
+AS -- as不可以省略，也可以用is
+
+--PL/SQL体部分
+
+END procedure_name;
+
+--------------调用存储过程-----------------
+
+EXECUTE Procedure_name '' --存储过程如果有参数，后面加参数格式为：@参数名=value，也可直接为参数值value
+
+--------------删除存储过程-----------------
+
+drop procedure procedure_name    --在存储过程中能调用另外一个存储过程，而不能删除另外一个存储过程
+</code></pre>
+
+<ul>
+<li>存储过程或者存储函数，只能创建或者替换。</li>
+<li>参数可以带也可以不带。</li>
+</ul>
+
+<h2 id="不带参数的存储过程">不带参数的存储过程</h2>
+
+<pre><code class="language-sql">CREATE OR REPLACE
+procedure test as
+    begin
+        dbms_output.put_line('HelloWorld');
+    end;
+</code></pre>
+
+<h2 id="带参数的存储过程">带参数的存储过程</h2>
+
+<p>给指定的员工涨100元工资,并且打印涨前和涨后的薪水:</p>
+
+<pre><code class="language-sql">create or replace procedure test(pempno in emp.empno%type)
+as
+    pename emp.ename%type;
+    beforesal emp.sal%type;
+    aftersal emp.sal%type;
+begin
+    select ename,sal into pename,beforesal from emp where empno=pempno;
+    aftersal:=beforesal+100;
+    update emp set sal=aftersal where empno=pempno; 
+    dbms_output.put_line('姓名: '||pename||' 涨前工资:'||beforesal||'涨后工资:'||aftersal);
+end;
+</code></pre>
+
+<p><strong>注意</strong>
+- 要明确说明参数是输入参数（<strong>in</strong>)还是输出参数（<strong>out</strong>)
+- 为保证调用多个存储过程中处在同一个事务中，所以一般不在存储过程或者存储函数中，commit或rollback</p>
+
+<h2 id="调用执行方式">调用执行方式</h2>
+
+<ol>
+<li><p><code>exec</code>命令
+exec是SQLPlus命令，<strong>只能在SQLPlus中使用</strong>，exec可以直接跟存储过程名（可以省略括号）</p>
+
+<pre><code class="language-sh">SQL&gt; set serveroutput on;
+SQL&gt; exec test;
+</code></pre>
+
+<ol>
+<li>使用<code>call</code>命令
+在SQL中使用<code>call</code>调用存储过程时，需要带上括号，不限制使用场景
+<code>sh
+SQL&gt; set serveroutput on;
+SQL&gt; call test();
+</code></li>
+</ol></li>
+
+<li><p>使用PLSQL语句调用</p>
+
+<pre><code class="language-sh">SQL&gt; set serveroutput on;
+SQL&gt; begin
+     test;
+ end;
+</code></pre></li>
+</ol>
+</div>
+        <div class="post_footer">
+          
+          <div class="meta">
+            <div class="info">
+              <span class="field tags">
+                <i class="remixicon-stack-line"></i>
+                
+                <a href="https://blog.weikai.me/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">存储过程</a>
+                
+                <a href="https://blog.weikai.me/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                
+              </span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+  <a id="back_to_top" href="#" class="back_to_top"><span>△</span></a>
+</div>
+<footer class="footer">
+  <div class="powered_by">
+    <a href="https://zeuk.me">Designed by Zeuk,</a>
+    <a href="http://www.gohugo.io/">Proudly published with Hugo</a>
+  </div>
+
+  <div class="footer_slogan">
+    <span></span>
+  </div>
+</footer>
+
+
+
+<script src="https://blog.weikai.me/js/jquery-3.3.1.min.js"></script>
+<script src="https://blog.weikai.me/js/zozo.js"></script>
+<script src="https://blog.weikai.me/js/highlight.pack.js"></script>
+<link  href="https://blog.weikai.me/css/fancybox.min.css" rel="stylesheet">
+<script src="https://blog.weikai.me/js/fancybox.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad()</script>
+
+
+  <script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-104075713-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+</body>
+</html>

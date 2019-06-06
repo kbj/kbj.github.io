@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://blog.weikai.me/</loc>
+    <lastmod>2019-06-06T23:05:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/about/</loc>
+    <lastmod>2019-06-06T23:05:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/categories/</loc>
+    <lastmod>2018-09-04T14:25:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/posts/</loc>
+    <lastmod>2018-09-04T14:25:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/tags/</loc>
+    <lastmod>2018-09-04T14:25:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</loc>
+    <lastmod>2018-09-04T14:25:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2018-09-04T14:25:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2018-09-04T14:25:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.weikai.me/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2018-09-04T14:25:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

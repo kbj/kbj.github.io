@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on WeiKai&#39;s Blog</title>
+    <link>https://blog.weikai.me/tags/</link>
+    <description>Recent content in Tags on WeiKai&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 04 Sep 2018 14:25:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.weikai.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>存储过程</title>
+      <link>https://blog.weikai.me/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Tue, 04 Sep 2018 14:25:00 +0800</pubDate>
+      
+      <guid>https://blog.weikai.me/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据库</title>
+      <link>https://blog.weikai.me/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Tue, 04 Sep 2018 14:25:00 +0800</pubDate>
+      
+      <guid>https://blog.weikai.me/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

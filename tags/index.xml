@@ -6,10 +6,55 @@
     <description>Recent content in Tags on WeiKai&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 04 Sep 2018 14:25:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2019 22:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.weikai.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Raspberry Pi</title>
+      <link>https://blog.weikai.me/tags/raspberry-pi/</link>
+      <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
+      
+      <guid>https://blog.weikai.me/tags/raspberry-pi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opencv</title>
+      <link>https://blog.weikai.me/tags/opencv/</link>
+      <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
+      
+      <guid>https://blog.weikai.me/tags/opencv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opencv-python</title>
+      <link>https://blog.weikai.me/tags/opencv-python/</link>
+      <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
+      
+      <guid>https://blog.weikai.me/tags/opencv-python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opencv4</title>
+      <link>https://blog.weikai.me/tags/opencv4/</link>
+      <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
+      
+      <guid>https://blog.weikai.me/tags/opencv4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>树莓派</title>
+      <link>https://blog.weikai.me/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+      <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
+      
+      <guid>https://blog.weikai.me/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>存储过程</title>

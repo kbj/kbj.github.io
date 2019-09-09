@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-cn" >
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  
+  <meta name="author"
+        content="WeiKai"/>
+
+  
+  <meta name="description" content="前言 因为最近准备往树莓派上放一个基于OpenCV的项目，在PC上测试没有问题后放在树莓派上pip install -r requirements.txt的时候却提示： ERROR: Could not find a version that satisfies the requirement opencv-python (from versions: none) ERROR: No matching distribution found for opencv-python 再去网上搜索"/>
+  
+
+  
+  
+  <meta name="keywords" content="WeiKai, Blog"/>
+  
+
+  
+  <link rel="canonical" href="https://blog.weikai.me/posts/raspberry-pi%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv4/"/>
+
+  
+
+  <title>Raspberry Pi编译安装OpenCV4 &middot; WeiKai&#39;s Blog</title>
+
+  <link rel="shortcut icon" href="https://blog.weikai.me/images/favicon.ico"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/animate.min.css"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/remixicon.css"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/zozo.css"/>
+  <link rel="stylesheet" href="https://blog.weikai.me/css/highlight.css"/>
+
+  
+  
+</head>
+
+<body>
+<div class="main animated">
+  <div class="nav_container animated fadeInDown">
+  <div class="site_nav" id="site_nav">
+    <ul>
+      
+      <li>
+        <a href="/">首页</a>
+      </li>
+      
+      <li>
+        <a href="/posts/">归档</a>
+      </li>
+      
+      <li>
+        <a href="/tags/">标签</a>
+      </li>
+      
+      <li>
+        <a href="/about/">关于</a>
+      </li>
+      
+    </ul>
+  </div>
+  <div class="menu_icon">
+    <a id="menu_icon"><i class="remixicon-links-line"></i></a>
+  </div>
+</div>
+
+  <div class="header animated fadeInDown">
+  <div class="site_title_container">
+    <div class="site_title">
+      <h1>
+        <a href="https://blog.weikai.me/">
+          <span>WeiKai&#39;s Blog</span>
+          <img src="https://blog.weikai.me/images/logo.svg"/>
+        </a>
+      </h1>
+    </div>
+    <div class="description">
+      <p class="sub_title"></p>
+      <div class="my_socials">
+        
+        
+        <a href="%20" title="facebook" target="_blank"><i class="remixicon-facebook-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="github" target="_blank"><i class="remixicon-github-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="instagram" target="_blank"><i class="remixicon-instagram-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="twitter" target="_blank"><i class="remixicon-twitter-fill"></i></a>
+        
+        
+        
+        <a href="%20" title="weibo" target="_blank"><i class="remixicon-weibo-fill"></i></a>
+        
+        
+        <a href="https://blog.weikai.me/index.xml" type="application/rss+xml" title="rss" target="_blank"><i class="remixicon-rss-fill"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="content">
+    <div class="post_page">
+      <div class="post animated fadeInDown">
+        <div class="post_title post_detail_title">
+          <h2><a href='/posts/raspberry-pi%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv4/'>Raspberry Pi编译安装OpenCV4</a></h2>
+          <span class="date">2019.09.09</span>
+        </div>
+        <div class="post_content markdown">
+
+<h1 id="前言">前言</h1>
+
+<p>因为最近准备往树莓派上放一个基于OpenCV的项目，在PC上测试没有问题后放在树莓派上<code>pip install -r requirements.txt</code>的时候却提示：</p>
+
+<pre><code>ERROR: Could not find a version that satisfies the requirement opencv-python (from versions: none)
+ERROR: No matching distribution found for opencv-python
+</code></pre>
+
+<p>再去网上搜索后才发现<code>opencv-python</code>这个库并没有提供ARM架构的二进制包。不过偶然发现还有一个专门为树莓派提供的<a href="https://www.piwheels.org">第三方依赖库</a>，可是这里目前只提供基于Python3.5且版本号太低无法满足我当前项目的要求，那接下来就只剩下源码自己独立编译这条路了。</p>
+
+<h1 id="环境准备">环境准备</h1>
+
+<ul>
+<li><p>Python3.7.4</p></li>
+
+<li><p>需要安装Numpy：<code>pip install numpy</code></p></li>
+
+<li><p>扩展文件系统</p>
+
+<ol>
+<li><p>输入 <code>sudo raspi-config</code></p></li>
+
+<li><p>选择 <code>Advanced Options</code></p></li>
+
+<li><p>选择 <code>Expand Filesystem</code></p></li>
+</ol></li>
+
+<li><p>扩充Swap</p>
+
+<ol>
+<li><p>编辑文件：<code>sudo vi /etc/dphys-swapfile</code>，将<code>CONF_SWAPSIZE</code>的值修改成<code>2048</code></p></li>
+
+<li><p>重启dphys-swapfile：<code>sudo /etc/init.d/dphys-swapfile restart</code></p></li>
+</ol></li>
+
+<li><p>更新系统的包</p>
+
+<pre><code class="language-shell">sudo apt-get update
+</code></pre>
+
+<ul>
+<li>在系统中安装相关依赖</li>
+</ul>
+
+<pre><code class="language-shell">sudo apt-get install build-essential cmake unzip pkg-config
+sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get install libxvidcore-dev libx264-dev
+sudo apt-get install libgtk-3-dev
+sudo apt-get install libcanberra-gtk*
+sudo apt-get install libatlas-base-dev gfortran
+sudo apt-get install python3-dev
+</code></pre></li>
+
+<li><p>下载源码并解压</p>
+
+<pre><code class="language-shell">wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
+wget -O opencv_contrib.zip https://codeload.github.com/opencv/opencv_contrib/zip/4.1.1
+unzip opencv.zip
+unzip opencv_contrib.zip
+</code></pre>
+
+<h1 id="编译安装">编译安装</h1>
+
+<ul>
+<li>在<code>opencv-4.1.1</code>中创建<code>build</code>文件夹，用于存放源码编译后的产物</li>
+</ul>
+
+<pre><code class="language-shell">cd opencv-4.1.1
+mkdir build
+cd build
+</code></pre></li>
+
+<li><p>配置CMake参数</p>
+
+<pre><code class="language-shell">sudo cmake -D CMAKE_BUILD_TYPE=RELEASE
+-D CMAKE_INSTALL_PREFIX=/usr/local
+-D OPENCV_EXTRA_MODULES_PATH=/home/pi/opencv/opencv_contrib-4.1.1/modules
+-D ENABLE_NEON=ON
+-D ENABLE_VFPV3=ON
+-D WITH_FFMPEG=ON
+-D INSTALL_PYTHON_EXAMPLES=ON
+-D WITH_GSTREAMER=ON
+-D OPENCV_EXTRA_EXE_LINKER_FLAGS=-latomic
+-D BUILD_EXAMPLES=ON ..
+</code></pre>
+
+<ul>
+<li><p>在CMake检查结束后，会打印出详细的信息，需要检查其中<code>Python3</code>部分的各个参数是否都有值。</p></li>
+
+<li><p>确认没问题后即开始编译OpenCV，建议可以在这时候使用<code>screen</code>命令创建一个可以在后台持续执行的会话。</p></li>
+
+<li><p>可以在make后增加<code>-j2</code>参数指定使用2个核心参与编译，这里使用单核编译，即不加任何参数。敲完命令后就需要等待大约七八小时后才能完成（Raspberry Pi 3B）</p></li>
+</ul>
+
+<pre><code class="language-shell">sudo make
+</code></pre></li>
+
+<li><p>编译结束并且没有报错信息后，需要修改一下配置，<code>modules/python3/CMakeFiles/opencv_python3.dir/link.txt</code>中第一行增加<code>-latomic</code>参数</p>
+
+<pre><code class="language-shell">vi build/modules/python3/CMakeFiles/opencv_python3.dir/link.txt
+</code></pre>
+
+<p>在第一行中的起始中 <code>/usr/bin/c++ -fPIC    -fsigned-char -W -Wall</code> 修改为 <code>/usr/bin/c++ -fPIC -latomic -fsigned-char -W -Wall</code></p>
+
+<ul>
+<li>安装OpenCV</li>
+</ul>
+
+<pre><code class="language-shell">sudo make install
+sudo ldconfig
+</code></pre></li>
+</ul>
+
+<h1 id="检查安装结果">检查安装结果</h1>
+
+<pre><code class="language-python">$ python
+Python 3.7.4 (default, Sep  8 2019, 10:06:39)
+[GCC 8.3.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import cv2
+&gt;&gt;&gt; cv2.__version__
+'4.1.1'
+</code></pre>
+
+<h1 id="参考链接">参考链接</h1>
+
+<ul>
+<li><p><a href="https://goldensoap.github.io/2018/10/20/%E3%80%90%E6%A0%91%E8%8E%93%E6%B4%BE%E3%80%91%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv/">【树莓派】编译安装opencv+python调用</a></p></li>
+
+<li><p><a href="https://www.pyimagesearch.com/2018/09/26/install-opencv-4-on-your-raspberry-pi/">Install OpenCV 4 on your Raspberry Pi</a></p></li>
+</ul>
+</div>
+        <div class="post_footer">
+          
+          <div class="meta">
+            <div class="info">
+              <span class="field tags">
+                <i class="remixicon-stack-line"></i>
+                
+                <a href="https://blog.weikai.me/tags/raspberry-pi/">Raspberry Pi</a>
+                
+                <a href="https://blog.weikai.me/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+                
+                <a href="https://blog.weikai.me/tags/opencv/">opencv</a>
+                
+                <a href="https://blog.weikai.me/tags/opencv4/">opencv4</a>
+                
+                <a href="https://blog.weikai.me/tags/opencv-python/">opencv-python</a>
+                
+              </span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+  <a id="back_to_top" href="#" class="back_to_top"><span>△</span></a>
+</div>
+<footer class="footer">
+  <div class="powered_by">
+    <a href="https://zeuk.me">Designed by Zeuk,</a>
+    <a href="http://www.gohugo.io/">Proudly published with Hugo</a>
+  </div>
+
+  <div class="footer_slogan">
+    <span></span>
+  </div>
+</footer>
+
+
+
+<script src="https://blog.weikai.me/js/jquery-3.3.1.min.js"></script>
+<script src="https://blog.weikai.me/js/zozo.js"></script>
+<script src="https://blog.weikai.me/js/highlight.pack.js"></script>
+<link  href="https://blog.weikai.me/css/fancybox.min.css" rel="stylesheet">
+<script src="https://blog.weikai.me/js/fancybox.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad()</script>
+
+
+  <script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-104075713-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+</body>
+</html>

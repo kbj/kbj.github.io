@@ -129,45 +129,45 @@
 </ol>
 <h1 id="简单例子">简单例子</h1>
 <h2 id="基本语法">基本语法</h2>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">--------------创建存储过程-----------------
-</span><span class="c1"></span><span class="k">CREATE</span> <span class="p">[</span><span class="k">OR</span> <span class="k">REPLACE</span><span class="p">]</span> <span class="k">PROCEDURE</span> <span class="n">procedure_name</span><span class="p">(</span><span class="err">参数列表</span><span class="p">)</span> 
-<span class="k">AS</span> <span class="c1">-- as不可以省略，也可以用is
-</span><span class="c1"></span>
-<span class="c1">--PL/SQL体部分
-</span><span class="c1"></span>
-<span class="k">END</span> <span class="n">procedure_name</span><span class="p">;</span>
-
-<span class="c1">--------------调用存储过程-----------------
-</span><span class="c1"></span>
-<span class="k">EXECUTE</span> <span class="n">Procedure_name</span> <span class="s1">&#39;&#39;</span> <span class="c1">--存储过程如果有参数，后面加参数格式为：@参数名=value，也可直接为参数值value
-</span><span class="c1"></span>
-<span class="c1">--------------删除存储过程-----------------
-</span><span class="c1"></span>
-<span class="k">drop</span> <span class="k">procedure</span> <span class="n">procedure_name</span>    <span class="c1">--在存储过程中能调用另外一个存储过程，而不能删除另外一个存储过程
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">--------------创建存储过程-----------------
+</span><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="p">[</span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">]</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">procedure_name</span><span class="p">(</span><span class="err">参数列表</span><span class="p">)</span><span class="w"> 
+</span><span class="w"></span><span class="k">AS</span><span class="w"> </span><span class="c1">-- as不可以省略，也可以用is
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="c1">--PL/SQL体部分
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="k">END</span><span class="w"> </span><span class="n">procedure_name</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">--------------调用存储过程-----------------
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">Procedure_name</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="c1">--存储过程如果有参数，后面加参数格式为：@参数名=value，也可直接为参数值value
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="c1">--------------删除存储过程-----------------
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="k">drop</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">procedure_name</span><span class="w">    </span><span class="c1">--在存储过程中能调用另外一个存储过程，而不能删除另外一个存储过程
 </span></code></pre></div><ul>
 <li>存储过程或者存储函数，只能创建或者替换。</li>
 <li>参数可以带也可以不带。</li>
 </ul>
 <h2 id="不带参数的存储过程">不带参数的存储过程</h2>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span>
-<span class="k">procedure</span> <span class="n">test</span> <span class="k">as</span>
-    <span class="k">begin</span>
-	    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;HelloWorld&#39;</span><span class="p">);</span>
-    <span class="k">end</span><span class="p">;</span>
-</code></pre></div><h2 id="带参数的存储过程">带参数的存储过程</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w">
+</span><span class="w"></span><span class="k">procedure</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">as</span><span class="w">
+</span><span class="w">    </span><span class="k">begin</span><span class="w">
+</span><span class="w">	    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;HelloWorld&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></code></pre></div><h2 id="带参数的存储过程">带参数的存储过程</h2>
 <p>给指定的员工涨100元工资,并且打印涨前和涨后的薪水:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">or</span> <span class="k">replace</span> <span class="k">procedure</span> <span class="n">test</span><span class="p">(</span><span class="n">pempno</span> <span class="k">in</span> <span class="n">emp</span><span class="p">.</span><span class="n">empno</span><span class="o">%</span><span class="k">type</span><span class="p">)</span>
-<span class="k">as</span>
-    <span class="n">pename</span> <span class="n">emp</span><span class="p">.</span><span class="n">ename</span><span class="o">%</span><span class="k">type</span><span class="p">;</span>
-    <span class="n">beforesal</span> <span class="n">emp</span><span class="p">.</span><span class="n">sal</span><span class="o">%</span><span class="k">type</span><span class="p">;</span>
-    <span class="n">aftersal</span> <span class="n">emp</span><span class="p">.</span><span class="n">sal</span><span class="o">%</span><span class="k">type</span><span class="p">;</span>
-<span class="k">begin</span>
-    <span class="k">select</span> <span class="n">ename</span><span class="p">,</span><span class="n">sal</span> <span class="k">into</span> <span class="n">pename</span><span class="p">,</span><span class="n">beforesal</span> <span class="k">from</span> <span class="n">emp</span> <span class="k">where</span> <span class="n">empno</span><span class="o">=</span><span class="n">pempno</span><span class="p">;</span>
-    <span class="n">aftersal</span><span class="p">:</span><span class="o">=</span><span class="n">beforesal</span><span class="o">+</span><span class="mi">100</span><span class="p">;</span>
-    <span class="k">update</span> <span class="n">emp</span> <span class="k">set</span> <span class="n">sal</span><span class="o">=</span><span class="n">aftersal</span> <span class="k">where</span> <span class="n">empno</span><span class="o">=</span><span class="n">pempno</span><span class="p">;</span> 
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;姓名: &#39;</span><span class="o">||</span><span class="n">pename</span><span class="o">||</span><span class="s1">&#39; 涨前工资:&#39;</span><span class="o">||</span><span class="n">beforesal</span><span class="o">||</span><span class="s1">&#39;涨后工资:&#39;</span><span class="o">||</span><span class="n">aftersal</span><span class="p">);</span>
-<span class="k">end</span><span class="p">;</span>
-</code></pre></div><p><strong>注意</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="n">pempno</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">emp</span><span class="p">.</span><span class="n">empno</span><span class="o">%</span><span class="k">type</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">as</span><span class="w">
+</span><span class="w">    </span><span class="n">pename</span><span class="w"> </span><span class="n">emp</span><span class="p">.</span><span class="n">ename</span><span class="o">%</span><span class="k">type</span><span class="p">;</span><span class="w">
+</span><span class="w">    </span><span class="n">beforesal</span><span class="w"> </span><span class="n">emp</span><span class="p">.</span><span class="n">sal</span><span class="o">%</span><span class="k">type</span><span class="p">;</span><span class="w">
+</span><span class="w">    </span><span class="n">aftersal</span><span class="w"> </span><span class="n">emp</span><span class="p">.</span><span class="n">sal</span><span class="o">%</span><span class="k">type</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">begin</span><span class="w">
+</span><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">ename</span><span class="p">,</span><span class="n">sal</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">pename</span><span class="p">,</span><span class="n">beforesal</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">emp</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">empno</span><span class="o">=</span><span class="n">pempno</span><span class="p">;</span><span class="w">
+</span><span class="w">    </span><span class="n">aftersal</span><span class="p">:</span><span class="o">=</span><span class="n">beforesal</span><span class="o">+</span><span class="mi">100</span><span class="p">;</span><span class="w">
+</span><span class="w">    </span><span class="k">update</span><span class="w"> </span><span class="n">emp</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">sal</span><span class="o">=</span><span class="n">aftersal</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">empno</span><span class="o">=</span><span class="n">pempno</span><span class="p">;</span><span class="w"> 
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;姓名: &#39;</span><span class="o">||</span><span class="n">pename</span><span class="o">||</span><span class="s1">&#39; 涨前工资:&#39;</span><span class="o">||</span><span class="n">beforesal</span><span class="o">||</span><span class="s1">&#39;涨后工资:&#39;</span><span class="o">||</span><span class="n">aftersal</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p><strong>注意</strong></p>
 <ul>
 <li>要明确说明参数是输入参数（<strong>in</strong>)还是输出参数（<strong>out</strong>)</li>
 <li>为保证调用多个存储过程中处在同一个事务中，所以一般不在存储过程或者存储函数中，commit或rollback</li>
@@ -177,18 +177,18 @@
 <li><code>exec</code>命令
 exec是SQLPlus命令，<strong>只能在SQLPlus中使用</strong>，exec可以直接跟存储过程名（可以省略括号）</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">SQL&gt; <span class="nb">set</span> serveroutput on<span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">SQL&gt; <span class="nb">set</span> serveroutput on<span class="p">;</span>
 SQL&gt; <span class="nb">exec</span> test<span class="p">;</span>
 </code></pre></div><ol start="2">
 <li>使用<code>call</code>命令
 在SQL中使用<code>call</code>调用存储过程时，需要带上括号，不限制使用场景</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">SQL&gt; <span class="nb">set</span> serveroutput on<span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">SQL&gt; <span class="nb">set</span> serveroutput on<span class="p">;</span>
 SQL&gt; call test<span class="o">()</span><span class="p">;</span>
 </code></pre></div><ol start="3">
 <li>使用PLSQL语句调用</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">SQL&gt; <span class="nb">set</span> serveroutput on<span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">SQL&gt; <span class="nb">set</span> serveroutput on<span class="p">;</span>
 SQL&gt; begin
          test<span class="p">;</span>
      end<span class="p">;</span>

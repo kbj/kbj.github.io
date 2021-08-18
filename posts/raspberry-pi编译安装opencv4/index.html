@@ -110,7 +110,7 @@
                     </div>
                     <div class="post_content markdown"><h1 id="前言">前言</h1>
 <p>因为最近准备往树莓派上放一个基于OpenCV的项目，在PC上测试没有问题后放在树莓派上<code>pip install -r requirements.txt</code>的时候却提示：</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ERROR: Could not find a version that satisfies the requirement opencv-python (from versions: none)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ERROR: Could not find a version that satisfies the requirement opencv-python (from versions: none)
 ERROR: No matching distribution found for opencv-python
 </code></pre></div><p>再去网上搜索后才发现<code>opencv-python</code>这个库并没有提供ARM架构的二进制包。不过偶然发现还有一个专门为树莓派提供的<a href="https://www.piwheels.org">第三方依赖库</a>，可是这里目前只提供基于Python3.5且版本号太低无法满足我当前项目的要求，那接下来就只剩下源码自己独立编译这条路了。</p>
 <h1 id="环境准备">环境准备</h1>
@@ -148,11 +148,11 @@ ERROR: No matching distribution found for opencv-python
 </li>
 <li>
 <p>更新系统的包</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get update
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get update
 </code></pre></div></li>
 <li>
 <p>在系统中安装相关依赖</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get install build-essential cmake unzip pkg-config
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get install build-essential cmake unzip pkg-config
 sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
 sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt-get install libxvidcore-dev libx264-dev
@@ -163,7 +163,7 @@ sudo apt-get install python3-dev
 </code></pre></div></li>
 <li>
 <p>下载源码并解压</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
 wget -O opencv_contrib.zip https://codeload.github.com/opencv/opencv_contrib/zip/4.1.1
 unzip opencv.zip
 unzip opencv_contrib.zip
@@ -173,13 +173,13 @@ unzip opencv_contrib.zip
 <ul>
 <li>
 <p>在<code>opencv-4.1.1</code>中创建<code>build</code>文件夹，用于存放源码编译后的产物</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> opencv-4.1.1
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> opencv-4.1.1
 mkdir build
 <span class="nb">cd</span> build
 </code></pre></div></li>
 <li>
 <p>配置CMake参数</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">sudo cmake -D <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>RELEASE
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo cmake -D <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>RELEASE
 -D <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>/usr/local
 -D <span class="nv">OPENCV_EXTRA_MODULES_PATH</span><span class="o">=</span>/home/pi/opencv/opencv_contrib-4.1.1/modules
 -D <span class="nv">ENABLE_NEON</span><span class="o">=</span>ON
@@ -198,23 +198,23 @@ mkdir build
 </li>
 <li>
 <p>可以在make后增加<code>-j2</code>参数指定使用2个核心参与编译，这里使用单核编译，即不加任何参数。敲完命令后就需要等待大约七八小时后才能完成（Raspberry Pi 3B）</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">sudo make
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo make
 </code></pre></div></li>
 <li>
 <p>编译结束并且没有报错信息后，需要修改一下配置，<code>modules/python3/CMakeFiles/opencv_python3.dir/link.txt</code>中第一行增加<code>-latomic</code>参数</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">vi build/modules/python3/CMakeFiles/opencv_python3.dir/link.txt
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vi build/modules/python3/CMakeFiles/opencv_python3.dir/link.txt
 </code></pre></div><p>在第一行中的起始中 <code>/usr/bin/c++ -fPIC    -fsigned-char -W -Wall</code> 修改为 <code>/usr/bin/c++ -fPIC -latomic -fsigned-char -W -Wall</code></p>
 </li>
 <li>
 <p>安装OpenCV</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">sudo make install
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo make install
 sudo ldconfig
 </code></pre></div></li>
 </ul>
 <h1 id="检查安装结果">检查安装结果</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">$</span> <span class="n">python</span>
-<span class="n">Python</span> <span class="mf">3.7</span><span class="o">.</span><span class="mi">4</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Sep</span>  <span class="mi">8</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mo">06</span><span class="p">:</span><span class="mi">39</span><span class="p">)</span>
-<span class="p">[</span><span class="n">GCC</span> <span class="mf">8.3</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="err">$</span> <span class="n">python</span>
+<span class="n">Python</span> <span class="mf">3.7.4</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Sep</span>  <span class="mi">8</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">39</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">8.3.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
 <span class="n">Type</span> <span class="s2">&#34;help&#34;</span><span class="p">,</span> <span class="s2">&#34;copyright&#34;</span><span class="p">,</span> <span class="s2">&#34;credits&#34;</span> <span class="ow">or</span> <span class="s2">&#34;license&#34;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span>

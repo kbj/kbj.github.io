@@ -6,10 +6,60 @@
     <description>Recent content in Tags on Wei&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 09 Sep 2019 22:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Aug 2021 23:25:00 +0800</lastBuildDate><atom:link href="https://wei.su/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>props</title>
+      <link>https://wei.su/tags/props/</link>
+      <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
+      
+      <guid>https://wei.su/tags/props/</guid>
+      <description></description>
+    </item>
     
-	<atom:link href="https://wei.su/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React</title>
+      <link>https://wei.su/tags/react/</link>
+      <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
+      
+      <guid>https://wei.su/tags/react/</guid>
+      <description></description>
+    </item>
     
+    <item>
+      <title>refs</title>
+      <link>https://wei.su/tags/refs/</link>
+      <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
+      
+      <guid>https://wei.su/tags/refs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>setState</title>
+      <link>https://wei.su/tags/setstate/</link>
+      <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
+      
+      <guid>https://wei.su/tags/setstate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>state</title>
+      <link>https://wei.su/tags/state/</link>
+      <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
+      
+      <guid>https://wei.su/tags/state/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>前端</title>
+      <link>https://wei.su/tags/%E5%89%8D%E7%AB%AF/</link>
+      <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
+      
+      <guid>https://wei.su/tags/%E5%89%8D%E7%AB%AF/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>opencv</title>

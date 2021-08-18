@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 18 Aug 2021 23:25:00 +0800</lastBuildDate><atom:link href="https://wei.su/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>React学习笔记（一）- 面向组件编程</title>
-      <link>https://wei.su/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>https://wei.su/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
       <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
       
-      <guid>https://wei.su/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://wei.su/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid>
       <description>把自己学习React中记录的笔记发布到这里 1、基本理解和使用 函数式组件 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34; /&amp;gt; &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=edge&amp;#34; /&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34; /&amp;gt; &amp;lt;title&amp;gt;函数式组件&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;test&amp;#34;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;!-- 引入核心库 --&amp;gt; &amp;lt;script src=&amp;#34;../js/react.development.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;!-- 引入re</description>
     </item>
     

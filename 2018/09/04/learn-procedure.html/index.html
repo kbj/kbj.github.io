@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#78909C" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Wei&#39;s Blog" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="white" /><meta property="article:published_time" content="2018-09-04T14:25:00&#43;08:00" /><meta property="article:modified_time" content="2022-06-08T13:39:31&#43;08:00" /><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" /><meta property="article:published_time" content="2018-09-04T14:25:00&#43;08:00" /><meta property="article:modified_time" content="2022-06-08T14:03:58&#43;08:00" /><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
     <link href="/icon.png" rel="Bookmark" />
     <link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
 {
@@ -41,7 +41,7 @@
     "url": "https:\/\/wei.su\/cover.png",
     "width": 1000 ,
     "height": 519 },"genre": "posts","keywords": "存储过程, 数据库, Oracle, 笔记","wordcount": 1050 ,
-  "url": "https:\/\/wei.su\/2018\/09\/04\/learn-procedure.html\/","datePublished": "2018-09-04T14:25:00\u002b08:00","dateModified": "2022-06-08T13:39:31\u002b08:00","author": {
+  "url": "https:\/\/wei.su\/2018\/09\/04\/learn-procedure.html\/","datePublished": "2018-09-04T14:25:00\u002b08:00","dateModified": "2022-06-08T14:03:58\u002b08:00","author": {
     "@type": "Person",
     "name": "Wei"
   },"description": ""
@@ -111,7 +111,7 @@
                                     <i class="eva eva-edit-2-outline mr-1"></i>
                                     <span>
                                         <time
-                                            title="最后修改于：2022年06月08日 13:39:31"datetime="2022-06-08T13:39:31+08:00">2022年06月08日</time
+                                            title="最后修改于：2022年06月08日 14:03:58"datetime="2022-06-08T14:03:58+08:00">2022年06月08日</time
                                         >
                                     </span>
                                 </span><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
@@ -147,10 +147,16 @@
             </header>
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#基本语法">基本语法</a></li>
-    <li><a href="#不带参数的存储过程">不带参数的存储过程</a></li>
-    <li><a href="#带参数的存储过程">带参数的存储过程</a></li>
-    <li><a href="#调用执行方式">调用执行方式</a></li>
+    <li><a href="#什么是存储过程">什么是存储过程</a></li>
+    <li><a href="#使用存储过程的优点">使用存储过程的优点</a></li>
+    <li><a href="#简单例子">简单例子</a>
+      <ul>
+        <li><a href="#基本语法">基本语法</a></li>
+        <li><a href="#不带参数的存储过程">不带参数的存储过程</a></li>
+        <li><a href="#带参数的存储过程">带参数的存储过程</a></li>
+        <li><a href="#调用执行方式">调用执行方式</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
         </aside>
@@ -161,18 +167,18 @@
                         ><p>公司的项目使用到了存储过程，由于此前在学校从未接触到，因此记录下学习笔记。</p>
 
 
-<h1 class="group " id="什么是存储过程"
+<h2 class="group " id="什么是存储过程"
     >什么是存储过程<a href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%ad%98%e5%82%a8%e8%bf%87%e7%a8%8b"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <p>存储过程（Stored Procedure）是在大型数据库系统中，一组为了完成特定功能的SQL 语句集，存储在数据库中，经过第一次编译后再次调用不需要再次编译，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它。</p>
 
 
-<h1 class="group " id="使用存储过程的优点"
+<h2 class="group " id="使用存储过程的优点"
     >使用存储过程的优点<a href="#%e4%bd%bf%e7%94%a8%e5%ad%98%e5%82%a8%e8%bf%87%e7%a8%8b%e7%9a%84%e4%bc%98%e7%82%b9"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <ol>
 <li>
@@ -190,17 +196,17 @@
 </ol>
 
 
-<h1 class="group " id="简单例子"
+<h2 class="group " id="简单例子"
     >简单例子<a href="#%e7%ae%80%e5%8d%95%e4%be%8b%e5%ad%90"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 
 
-<h2 class="group " id="基本语法"
+<h3 class="group " id="基本语法"
     >基本语法<a href="#%e5%9f%ba%e6%9c%ac%e8%af%ad%e6%b3%95"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -244,10 +250,10 @@
 </ul>
 
 
-<h2 class="group " id="不带参数的存储过程"
+<h3 class="group " id="不带参数的存储过程"
     >不带参数的存储过程<a href="#%e4%b8%8d%e5%b8%a6%e5%8f%82%e6%95%b0%e7%9a%84%e5%ad%98%e5%82%a8%e8%bf%87%e7%a8%8b"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -267,10 +273,10 @@
 </div>
 </div>
 
-<h2 class="group " id="带参数的存储过程"
+<h3 class="group " id="带参数的存储过程"
     >带参数的存储过程<a href="#%e5%b8%a6%e5%8f%82%e6%95%b0%e7%9a%84%e5%ad%98%e5%82%a8%e8%bf%87%e7%a8%8b"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <p>给指定的员工涨100元工资,并且打印涨前和涨后的薪水:</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -308,10 +314,10 @@
 </ul>
 
 
-<h2 class="group " id="调用执行方式"
+<h3 class="group " id="调用执行方式"
     >调用执行方式<a href="#%e8%b0%83%e7%94%a8%e6%89%a7%e8%a1%8c%e6%96%b9%e5%bc%8f"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <ol>
 <li><code>exec</code>命令

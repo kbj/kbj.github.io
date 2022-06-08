@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#78909C" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Wei&#39;s Blog" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="white" /><meta property="article:published_time" content="2021-08-18T23:25:00&#43;08:00" /><meta property="article:modified_time" content="2022-06-08T13:38:37&#43;08:00" /><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" /><meta property="article:published_time" content="2021-08-18T23:25:00&#43;08:00" /><meta property="article:modified_time" content="2022-06-08T14:04:21&#43;08:00" /><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
     <link href="/icon.png" rel="Bookmark" />
     <link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
 {
@@ -41,7 +41,7 @@
     "url": "https:\/\/wei.su\/cover.png",
     "width": 1000 ,
     "height": 519 },"genre": "posts","keywords": "React, 前端, state, setState, props, refs","wordcount": 6830 ,
-  "url": "https:\/\/wei.su\/2021\/08\/18\/react-1.html\/","datePublished": "2021-08-18T23:25:00\u002b08:00","dateModified": "2022-06-08T13:38:37\u002b08:00","author": {
+  "url": "https:\/\/wei.su\/2021\/08\/18\/react-1.html\/","datePublished": "2021-08-18T23:25:00\u002b08:00","dateModified": "2022-06-08T14:04:21\u002b08:00","author": {
     "@type": "Person",
     "name": "Wei"
   },"description": ""
@@ -111,7 +111,7 @@
                                     <i class="eva eva-edit-2-outline mr-1"></i>
                                     <span>
                                         <time
-                                            title="最后修改于：2022年06月08日 13:38:37"datetime="2022-06-08T13:38:37+08:00">2022年06月08日</time
+                                            title="最后修改于：2022年06月08日 14:04:21"datetime="2022-06-08T14:04:21+08:00">2022年06月08日</time
                                         >
                                     </span>
                                 </span><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
@@ -153,38 +153,43 @@
             </header>
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#函数式组件">函数式组件</a></li>
-    <li><a href="#类式组件">类式组件</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#21setstate">2.1、setState</a>
+    <li><a href="#1基本理解和使用">1、基本理解和使用</a>
       <ul>
-        <li><a href="#对象式的setstate">对象式的setState</a></li>
-        <li><a href="#函数式的setstate">函数式的setState</a></li>
-        <li><a href="#总结">总结</a></li>
+        <li><a href="#函数式组件">函数式组件</a></li>
+        <li><a href="#类式组件">类式组件</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li><a href="#31基本使用">3.1、基本使用</a></li>
-    <li><a href="#32批量传递props">3.2、批量传递props</a></li>
-    <li><a href="#33对props传值做类型限制">3.3、对props传值做类型限制</a></li>
-    <li><a href="#34函数式组件使用props">3.4、函数式组件使用props</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#41字符串形式的ref过时">4.1、字符串形式的ref（过时）</a></li>
-    <li><a href="#42回调形式的ref">4.2、回调形式的ref</a></li>
-    <li><a href="#43createref使用">4.3、createRef使用</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#71生命周期流程图旧">7.1、生命周期流程图(旧)</a></li>
-    <li><a href="#72生命周期流程图新17以后">7.2、生命周期流程图(新，17以后)</a></li>
-    <li><a href="#73重要的勾子">7.3、重要的勾子</a></li>
-    <li><a href="#74即将废弃的勾子">7.4、即将废弃的勾子</a></li>
+    <li><a href="#2state">2、State</a>
+      <ul>
+        <li><a href="#21setstate">2.1、setState</a></li>
+      </ul>
+    </li>
+    <li><a href="#3props">3、props</a>
+      <ul>
+        <li><a href="#31基本使用">3.1、基本使用</a></li>
+        <li><a href="#32批量传递props">3.2、批量传递props</a></li>
+        <li><a href="#33对props传值做类型限制">3.3、对props传值做类型限制</a></li>
+        <li><a href="#34函数式组件使用props">3.4、函数式组件使用props</a></li>
+      </ul>
+    </li>
+    <li><a href="#4refs">4、refs</a>
+      <ul>
+        <li><a href="#41字符串形式的ref过时">4.1、字符串形式的ref（过时）</a></li>
+        <li><a href="#42回调形式的ref">4.2、回调形式的ref</a></li>
+        <li><a href="#43createref使用">4.3、createRef使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#5事件处理">5、事件处理</a></li>
+    <li><a href="#6高阶函数与函数柯里化">6、高阶函数与函数柯里化</a></li>
+    <li><a href="#7组件的生命周期">7、组件的生命周期</a>
+      <ul>
+        <li><a href="#71生命周期流程图旧">7.1、生命周期流程图(旧)</a></li>
+        <li><a href="#72生命周期流程图新17以后">7.2、生命周期流程图(新，17以后)</a></li>
+        <li><a href="#73重要的勾子">7.3、重要的勾子</a></li>
+        <li><a href="#74即将废弃的勾子">7.4、即将废弃的勾子</a></li>
+      </ul>
+    </li>
+    <li><a href="#8虚拟dom与dom-diffing算法">8、虚拟DOM与DOM Diffing算法</a></li>
   </ul>
 </nav>
         </aside>
@@ -194,17 +199,17 @@
                             ><svg class="w-4 h-4 fill-current text-gray-400" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10811" width="200" height="200"><path d="M480 192c-19.2 0-32-12.8-32-32v-128c0-19.2 12.8-32 32-32s32 12.8 32 32v128c0 19.2-12.8 32-32 32zM160 1024c-6.4 0-19.2 0-25.6-6.4l-128-128c0-6.4-6.4-19.2-6.4-25.6s6.4-19.2 6.4-25.6l512-512c12.8-6.4 38.4-6.4 51.2 0l128 128c0 6.4 6.4 19.2 6.4 25.6s-6.4 19.2-6.4 25.6l-512 512c-6.4 6.4-19.2 6.4-25.6 6.4z m-83.2-160l83.2 83.2 467.2-467.2-83.2-83.2-467.2 467.2zM992 576h-128c-19.2 0-32-12.8-32-32s12.8-32 32-32h128c19.2 0 32 12.8 32 32s-12.8 32-32 32zM768 288c-6.4 0-19.2 0-25.6-6.4-12.8-12.8-12.8-32 0-44.8l96-96c12.8-12.8 32-12.8 44.8 0s12.8 32 0 44.8l-96 96c0 6.4-12.8 6.4-19.2 6.4zM256 288c-6.4 0-19.2 0-25.6-6.4L134.4 185.6c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 12.8-12.8 12.8-19.2 12.8zM864 896c-6.4 0-19.2 0-25.6-6.4l-96-96c-12.8-12.8-12.8-32 0-44.8s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 6.4-12.8 6.4-19.2 6.4z" p-id="10812"></path><path d="M544 640c-6.4 0-19.2 0-25.6-6.4l-128-128c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l128 128c12.8 12.8 12.8 38.4 6.4 51.2-6.4 6.4-19.2 6.4-25.6 6.4z" p-id="10813"></path></svg></i
                         >
 
-<h1 class="group " id="1基本理解和使用"
+<h2 class="group " id="1基本理解和使用"
     >1、基本理解和使用<a href="#1%e5%9f%ba%e6%9c%ac%e7%90%86%e8%a7%a3%e5%92%8c%e4%bd%bf%e7%94%a8"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 
 
-<h2 class="group " id="函数式组件"
+<h3 class="group " id="函数式组件"
     >函数式组件<a href="#%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bb%84%e4%bb%b6"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -272,10 +277,10 @@
 </div>
 </div>
 
-<h2 class="group " id="类式组件"
+<h3 class="group " id="类式组件"
     >类式组件<a href="#%e7%b1%bb%e5%bc%8f%e7%bb%84%e4%bb%b6"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -347,10 +352,10 @@
 </div>
 </div>
 
-<h1 class="group " id="2state"
+<h2 class="group " id="2state"
     >2、State<a href="#2state"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <ul>
 <li>
@@ -510,18 +515,18 @@
 </div>
 </div>
 
-<h2 class="group " id="21setstate"
+<h3 class="group " id="21setstate"
     >2.1、setState<a href="#21setstate"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <p><strong>setState更新状态的2种写法</strong></p>
 
 
-<h3 class="group " id="对象式的setstate"
+<h4 class="group " id="对象式的setstate"
     >对象式的setState<a href="#%e5%af%b9%e8%b1%a1%e5%bc%8f%e7%9a%84setstate"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h3>
+></h4>
 
 <p><code>setState(stateChange, [callback])</code></p>
 <ul>
@@ -582,10 +587,10 @@
 </div>
 </div>
 
-<h3 class="group " id="函数式的setstate"
+<h4 class="group " id="函数式的setstate"
     >函数式的setState<a href="#%e5%87%bd%e6%95%b0%e5%bc%8f%e7%9a%84setstate"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h3>
+></h4>
 
 <p><code>setState(updater, [callback])</code></p>
 <ul>
@@ -665,10 +670,10 @@
 </div>
 </div>
 
-<h3 class="group " id="总结"
+<h4 class="group " id="总结"
     >总结<a href="#%e6%80%bb%e7%bb%93"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h3>
+></h4>
 
 <ol>
 <li>对象式的setState是函数式的setState的简写方式(语法糖)</li>
@@ -682,10 +687,10 @@
 </ol>
 
 
-<h1 class="group " id="3props"
+<h2 class="group " id="3props"
     >3、props<a href="#3props"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <ul>
 <li>props是只读的</li>
@@ -694,10 +699,10 @@
 <hr>
 
 
-<h2 class="group " id="31基本使用"
+<h3 class="group " id="31基本使用"
     >3.1、基本使用<a href="#31%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -748,10 +753,10 @@
 </div><hr>
 
 
-<h2 class="group " id="32批量传递props"
+<h3 class="group " id="32批量传递props"
     >3.2、批量传递props<a href="#32%e6%89%b9%e9%87%8f%e4%bc%a0%e9%80%92props"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -798,10 +803,10 @@
 </div><hr>
 
 
-<h2 class="group " id="33对props传值做类型限制"
+<h3 class="group " id="33对props传值做类型限制"
     >3.3、对props传值做类型限制<a href="#33%e5%af%b9props%e4%bc%a0%e5%80%bc%e5%81%9a%e7%b1%bb%e5%9e%8b%e9%99%90%e5%88%b6"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <ul>
 <li>需要引入prop-types.js</li>
@@ -966,10 +971,10 @@
 </div><hr>
 
 
-<h2 class="group " id="34函数式组件使用props"
+<h3 class="group " id="34函数式组件使用props"
     >3.4、函数式组件使用props<a href="#34%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bb%84%e4%bb%b6%e4%bd%bf%e7%94%a8props"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1015,10 +1020,10 @@
 </div>
 </div>
 
-<h1 class="group " id="4refs"
+<h2 class="group " id="4refs"
     >4、refs<a href="#4refs"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <ul>
 <li>组件内的标签可以定义ref属性来标识自己</li>
@@ -1026,10 +1031,10 @@
 <hr>
 
 
-<h2 class="group " id="41字符串形式的ref过时"
+<h3 class="group " id="41字符串形式的ref过时"
     >4.1、字符串形式的ref（过时）<a href="#41%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%bd%a2%e5%bc%8f%e7%9a%84ref%e8%bf%87%e6%97%b6"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1092,10 +1097,10 @@
 </div><hr>
 
 
-<h2 class="group " id="42回调形式的ref"
+<h3 class="group " id="42回调形式的ref"
     >4.2、回调形式的ref<a href="#42%e5%9b%9e%e8%b0%83%e5%bd%a2%e5%bc%8f%e7%9a%84ref"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <ul>
 <li>如果ref回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数null，然后第二次会传入参数DOM元素。这是因为在每次渲染时会创建一个新的函数实例，所以React 清空旧的ref并且设置新的。通过<strong>将ref的回调函数定义成class的绑定函数</strong>的方式可以避免上述问题，但是大多数情况下它是无关紧要的。</li>
@@ -1173,10 +1178,10 @@
 </div><hr>
 
 
-<h2 class="group " id="43createref使用"
+<h3 class="group " id="43createref使用"
     >4.3、createRef使用<a href="#43createref%e4%bd%bf%e7%94%a8"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1234,10 +1239,10 @@
 </div>
 </div>
 
-<h1 class="group " id="5事件处理"
+<h2 class="group " id="5事件处理"
     >5、事件处理<a href="#5%e4%ba%8b%e4%bb%b6%e5%a4%84%e7%90%86"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <ul>
 <li>通过onXxx属性指定事件处理函数(注意大小写)
@@ -1312,10 +1317,10 @@
 </div>
 </div>
 
-<h1 class="group " id="6高阶函数与函数柯里化"
+<h2 class="group " id="6高阶函数与函数柯里化"
     >6、高阶函数与函数柯里化<a href="#6%e9%ab%98%e9%98%b6%e5%87%bd%e6%95%b0%e4%b8%8e%e5%87%bd%e6%95%b0%e6%9f%af%e9%87%8c%e5%8c%96"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <ul>
 <li>高阶函数：如果一个函数符合下面2个规范中的任何一个，那该函数就是高阶函数
@@ -1402,17 +1407,17 @@
 </div>
 </div>
 
-<h1 class="group " id="7组件的生命周期"
+<h2 class="group " id="7组件的生命周期"
     >7、组件的生命周期<a href="#7%e7%bb%84%e4%bb%b6%e7%9a%84%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 
 
-<h2 class="group " id="71生命周期流程图旧"
+<h3 class="group " id="71生命周期流程图旧"
     >7.1、生命周期流程图(旧)<a href="#71%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f%e6%b5%81%e7%a8%8b%e5%9b%be%e6%97%a7"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <p><figure class="gallery-image">
         <picture class="noscript-hidden">
@@ -1749,10 +1754,10 @@
 </div>
 </div>
 
-<h2 class="group " id="72生命周期流程图新17以后"
+<h3 class="group " id="72生命周期流程图新17以后"
     >7.2、生命周期流程图(新，17以后)<a href="#72%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f%e6%b5%81%e7%a8%8b%e5%9b%be%e6%96%b017%e4%bb%a5%e5%90%8e"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <p><figure class="gallery-image">
         <picture class="noscript-hidden">
@@ -1801,10 +1806,10 @@
 </ul>
 
 
-<h2 class="group " id="73重要的勾子"
+<h3 class="group " id="73重要的勾子"
     >7.3、重要的勾子<a href="#73%e9%87%8d%e8%a6%81%e7%9a%84%e5%8b%be%e5%ad%90"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <ul>
 <li>render：初始化渲染或更新渲染调用</li>
@@ -1813,10 +1818,10 @@
 </ul>
 
 
-<h2 class="group " id="74即将废弃的勾子"
+<h3 class="group " id="74即将废弃的勾子"
     >7.4、即将废弃的勾子<a href="#74%e5%8d%b3%e5%b0%86%e5%ba%9f%e5%bc%83%e7%9a%84%e5%8b%be%e5%ad%90"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h2>
+></h3>
 
 <ul>
 <li>componentWillMount</li>
@@ -1825,10 +1830,10 @@
 </ul>
 
 
-<h1 class="group " id="8虚拟dom与dom-diffing算法"
+<h2 class="group " id="8虚拟dom与dom-diffing算法"
     >8、虚拟DOM与DOM Diffing算法<a href="#8%e8%99%9a%e6%8b%9fdom%e4%b8%8edom-diffing%e7%ae%97%e6%b3%95"
         ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
-></h1>
+></h2>
 
 <p><figure class="gallery-image">
         <picture class="noscript-hidden">

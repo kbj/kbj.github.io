@@ -9,11 +9,11 @@
     <lastBuildDate>Mon, 09 Sep 2019 22:00:00 +0800</lastBuildDate><atom:link href="https://wei.su/tags/opencv-python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raspberry Pi编译安装OpenCV4</title>
-      <link>https://wei.su/posts/raspberry-pi%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv4/</link>
+      <link>https://wei.su/2019/09/09/raspberry-pi-compile-install-opencv4.html/</link>
       <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
       
-      <guid>https://wei.su/posts/raspberry-pi%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv4/</guid>
-      <description>前言 因为最近准备往树莓派上放一个基于OpenCV的项目，在PC上测试没有问题后放在树莓派上pip install -r requirements.txt的时候却提示： ERROR: Could not find a version that satisfies the requirement opencv-python (from versions: none) ERROR: No matching distribution found for opencv-python 再去网上搜索</description>
+      <guid>https://wei.su/2019/09/09/raspberry-pi-compile-install-opencv4.html/</guid>
+      <description>在树莓派上编译安装OpenCV4流程记录</description>
     </item>
     
   </channel>

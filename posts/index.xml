@@ -9,29 +9,29 @@
     <lastBuildDate>Wed, 18 Aug 2021 23:25:00 +0800</lastBuildDate><atom:link href="https://wei.su/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>React学习笔记（一）- 面向组件编程</title>
-      <link>https://wei.su/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
+      <link>https://wei.su/2021/08/18/react-1.html/</link>
       <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
       
-      <guid>https://wei.su/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid>
-      <description>把自己学习React中记录的笔记发布到这里 1、基本理解和使用 函数式组件 &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34; /&amp;gt; &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=edge&amp;#34; /&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34; /&amp;gt; &amp;lt;title&amp;gt;函数式组件&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;test&amp;#34;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;!-- 引入核心库 --&amp;gt; &amp;lt;script src=&amp;#34;../js/react.development.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;!-- 引入re</description>
+      <guid>https://wei.su/2021/08/18/react-1.html/</guid>
+      <description>React学习笔记</description>
     </item>
     
     <item>
       <title>Raspberry Pi编译安装OpenCV4</title>
-      <link>https://wei.su/posts/raspberry-pi%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv4/</link>
+      <link>https://wei.su/2019/09/09/raspberry-pi-compile-install-opencv4.html/</link>
       <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
       
-      <guid>https://wei.su/posts/raspberry-pi%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv4/</guid>
-      <description>前言 因为最近准备往树莓派上放一个基于OpenCV的项目，在PC上测试没有问题后放在树莓派上pip install -r requirements.txt的时候却提示： ERROR: Could not find a version that satisfies the requirement opencv-python (from versions: none) ERROR: No matching distribution found for opencv-python 再去网上搜索</description>
+      <guid>https://wei.su/2019/09/09/raspberry-pi-compile-install-opencv4.html/</guid>
+      <description>在树莓派上编译安装OpenCV4流程记录</description>
     </item>
     
     <item>
-      <title>存储过程学习笔记</title>
-      <link>https://wei.su/posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <title>存储过程</title>
+      <link>https://wei.su/2018/09/04/learn-procedure.html/</link>
       <pubDate>Tue, 04 Sep 2018 14:25:00 +0800</pubDate>
       
-      <guid>https://wei.su/posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-      <description>公司的项目使用到了存储过程，由于此前在学校从未接触到这一方面，因此记录下学习笔记。 什么是存储过程 存储过程（Stored Procedure）是在大型数据库系统中，一组为了完成特定功能的SQL 语句集，存储</description>
+      <guid>https://wei.su/2018/09/04/learn-procedure.html/</guid>
+      <description>公司的项目使用到了存储过程，由于此前在学校从未接触到，因此记录下学习笔记。</description>
     </item>
     
   </channel>

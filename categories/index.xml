@@ -8,20 +8,29 @@
     <language>zh-cn</language>
     <lastBuildDate>Wed, 18 Aug 2021 23:25:00 +0800</lastBuildDate><atom:link href="https://wei.su/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>笔记</title>
-      <link>https://wei.su/categories/%E7%AC%94%E8%AE%B0/</link>
+      <title>React</title>
+      <link>https://wei.su/categories/react/</link>
       <pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate>
       
-      <guid>https://wei.su/categories/%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://wei.su/categories/react/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Raspberry Pi</title>
-      <link>https://wei.su/categories/raspberry-pi/</link>
+      <title>RaspberryPi</title>
+      <link>https://wei.su/categories/raspberrypi/</link>
       <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
       
-      <guid>https://wei.su/categories/raspberry-pi/</guid>
+      <guid>https://wei.su/categories/raspberrypi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>https://wei.su/categories/sql/</link>
+      <pubDate>Tue, 04 Sep 2018 14:25:00 +0800</pubDate>
+      
+      <guid>https://wei.su/categories/sql/</guid>
       <description></description>
     </item>
     

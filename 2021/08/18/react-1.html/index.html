@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-cn" class="lang-zh-cn"><head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="React,前端,state,setState,props,refs,Wei,Blog,Code," />
-    <meta name="description" content="React学习笔记" />
-    <meta itemprop="description" content="React学习笔记" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta itemprop="name" content="Wei&#39;s Blog" />
-    <link href="https://wei.su/index.xml" title="Wei&#39;s Blog" type="application/rss+xml" rel="alternate" />
-    <title>Wei&#39;s Blog</title><link rel="stylesheet" href="/main.49ebe7b1872687122c576585ccceb2e576dd39d9a9381c33534db185b51202d5.css" integrity="sha256-SevnsYcmhxIsV2WFzM6y5XbdOdmpOBwzU02xhbUSAtU=" /><meta property="og:site_name" content="Wei&#39;s Blog" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="React学习笔记（一）- 面向组件编程" />
-    <meta property="og:description" content="React学习笔记" />
-    <meta property="og:url" content="https://wei.su/2021/08/18/react-1.html/" />
-    <meta property="og:image" content="https://wei.su/icon.png" />
-    <meta property="article:publisher" content="https://wei.su/2021/08/18/react-1.html/" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Wei&#39;s Blog" />
-    <meta name="twitter:description" content="React学习笔记" />
-    <meta name="twitter:url" content="https://wei.su/2021/08/18/react-1.html/" />
-    <meta name="twitter:image" content="https://wei.su/icon.png" />
-    <meta name="twitter:site" content="@Wei" />
-    <meta property="og:image:width" content="1920" />
-    <meta property="og:image:height" content="1280" />
-    <meta name="theme-color" content="#78909C" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Wei&#39;s Blog" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="white" /><meta property="article:published_time" content="2021-08-18T23:25:00&#43;08:00" /><meta property="article:modified_time" content="2022-06-08T14:04:21&#43;08:00" /><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
-    <link href="/icon.png" rel="Bookmark" />
-    <link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
+<html lang="zh-cn" class="lang-zh-cn">
+    <head><meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="keywords" content="React,前端,state,setState,props,refs,Wei,Blog,Code," />
+<meta name="description" content="React学习笔记" />
+<meta itemprop="description" content="React学习笔记" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta itemprop="name" content="React学习笔记（一）- 面向组件编程 - Wei&#39;s Blog" />
+<link href="https://wei.su/index.xml" title="React学习笔记（一）- 面向组件编程 - Wei&#39;s Blog" type="application/rss+xml" rel="alternate" />
+<title>React学习笔记（一）- 面向组件编程 - Wei&#39;s Blog</title><link rel="stylesheet" href="/main.e4a5a69ffdbfe6ed8c6dc73fa2471864be0cc4b08fe5aaeb8e2fc85d52cdee69.css" integrity="sha256-5KWmn/2/5u2Mbcc/okcYZL4MxLCP5arrji/IXVLN7mk=" /><meta property="og:site_name" content="React学习笔记（一）- 面向组件编程 - Wei&#39;s Blog" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="React学习笔记（一）- 面向组件编程" />
+<meta property="og:description" content="React学习笔记" />
+<meta property="og:url" content="https://wei.su/2021/08/18/react-1.html/" /><meta property="article:publisher" content="https://wei.su/2021/08/18/react-1.html/" /><meta property="article:published_time" content="2021-08-18T23:25:00&#43;08:00" /><meta property="article:modified_time" content="2022-06-08T14:04:21&#43;08:00" /><meta name="theme-color" content="#78909C" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="React学习笔记（一）- 面向组件编程 - Wei&#39;s Blog" />
+<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="React学习笔记（一）- 面向组件编程 - Wei&#39;s Blog" />
+<meta name="twitter:description" content="React学习笔记" />
+<meta name="twitter:url" content="https://wei.su/2021/08/18/react-1.html/" /><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
+<link href="/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -36,11 +28,7 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https:\/\/wei.su\/2021\/08\/18\/react-1.html\/"
-  },"image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/wei.su\/cover.png",
-    "width": 1000 ,
-    "height": 519 },"genre": "posts","keywords": "React, 前端, state, setState, props, refs","wordcount": 6830 ,
+  },"genre": "posts","keywords": "React, 前端, state, setState, props, refs","wordcount": 6830 ,
   "url": "https:\/\/wei.su\/2021\/08\/18\/react-1.html\/","datePublished": "2021-08-18T23:25:00\u002b08:00","dateModified": "2022-06-08T14:04:21\u002b08:00","author": {
     "@type": "Person",
     "name": "Wei"
@@ -48,8 +36,11 @@
 }
 </script>
 
-</head>
-<body class="dark:bg-darkBg dark:text-darkText"><div class="relative mx-auto shadow-lg md:max-w-4xl xl:max-w-4xl 2xl:max-w-4xl">
+
+    </head>
+    
+    <body class="dark:bg-darkBg dark:text-darkText">
+        <div class="relative mx-auto shadow-lg md:max-w-4xl xl:max-w-4xl 2xl:max-w-4xl">
             <div class="main flex flex-col justify-between bg-white dark:bg-darkFg"><header class="relative">
     <nav id="nav" class="navbar top-0 z-10 flex items-center border-b px-5 py-6 dark:border-darkBorder md:px-10">
         <div class="route-items flex w-full items-center justify-around"><a
@@ -91,113 +82,61 @@
 </div>
 <main class="relative flex flex-grow" id="swup">
                     <div class="type-posts layout- w-full"><div class="relative h-full">
-        <div class="relative h-full">
-            <div class="page-view-article flex h-full flex-col bg-white dark:bg-darkFg">
-                <div class="relative"><div>
-                            <div class="-mb-2 w-full p-6 pb-0 text-3xl md:px-10">
-                                React学习笔记（一）- 面向组件编程
-                            </div>
-                        </div></div>
-                <div class="article-info border-b p-6 pb-3 text-sm dark:border-darkBorder md:px-10">
-                    <div>
-                        <div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
-                            <i class="eva eva-clock-outline mr-1"></i>
-                            <span>
-                                <time
-                                    title="发布于：2021年08月18日 23:25:00"datetime="2021-08-18T23:25:00+08:00">2021年08月18日</time
-                                >
-                            </span>
-                        </div><span class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
-                                    <i class="eva eva-edit-2-outline mr-1"></i>
-                                    <span>
-                                        <time
-                                            title="最后修改于：2022年06月08日 14:04:21"datetime="2022-06-08T14:04:21+08:00">2022年06月08日</time
-                                        >
-                                    </span>
-                                </span><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
-                                <i class="eva eva-flag-outline mr-1"></i>
-                                <span>阅读约 14 分钟</span>
-                            </div><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
-                                <i class="eva eva-bar-chart-outline mr-1"></i>
-                                <span>6830 字</span>
-                            </div></div><div class="mb-3 flex items-center">
-                            <i class="eva eva-pricetags-outline mr-1"></i>
-                            <span class="mr-3">标签</span><a href="/tags/react" title="React" class="group mr-2 flex items-center text-sm">
-                                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
-                                    <span class="text-gray-400 group-hover:text-theme">React</span>
-                                </a><a href="/tags/%E5%89%8D%E7%AB%AF" title="前端" class="group mr-2 flex items-center text-sm">
-                                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
-                                    <span class="text-gray-400 group-hover:text-theme">前端</span>
-                                </a><a href="/tags/state" title="state" class="group mr-2 flex items-center text-sm">
-                                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
-                                    <span class="text-gray-400 group-hover:text-theme">state</span>
-                                </a><a href="/tags/setstate" title="setState" class="group mr-2 flex items-center text-sm">
-                                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
-                                    <span class="text-gray-400 group-hover:text-theme">setState</span>
-                                </a><a href="/tags/props" title="props" class="group mr-2 flex items-center text-sm">
-                                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
-                                    <span class="text-gray-400 group-hover:text-theme">props</span>
-                                </a><a href="/tags/refs" title="refs" class="group mr-2 flex items-center text-sm">
-                                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
-                                    <span class="text-gray-400 group-hover:text-theme">refs</span>
-                                </a></div><div class="mb-3 flex items-center">
-                            <i class="eva eva-folder-outline mr-1"></i>
-                            <span class="mr-3">分类</span><a href="/categories/react" title="React" class="group flex items-center text-sm">
-                                    <span class="text-gray-400 group-hover:text-theme">React</span>
-                                    <span class="mx-0.5 group-last:hidden">,</span>
-                                </a></div></div><aside
-            class="toc border-b border-gray-300 px-5 py-5 dark:border-darkBorder md:px-10 2xl:fixed 2xl:top-10 2xl:m-0 2xl:-ml-72 2xl:w-72 2xl:border-none 2xl:p-0 2xl:py-4 2xl:pr-4 "
-        >
-            <header>
-                <h1 class="mb-3 text-2xl font-bold 2xl:mb-4">文章目录</h1>
-            </header>
-            <nav id="TableOfContents">
-  <ul>
-    <li><a href="#1基本理解和使用">1、基本理解和使用</a>
-      <ul>
-        <li><a href="#函数式组件">函数式组件</a></li>
-        <li><a href="#类式组件">类式组件</a></li>
-      </ul>
-    </li>
-    <li><a href="#2state">2、State</a>
-      <ul>
-        <li><a href="#21setstate">2.1、setState</a></li>
-      </ul>
-    </li>
-    <li><a href="#3props">3、props</a>
-      <ul>
-        <li><a href="#31基本使用">3.1、基本使用</a></li>
-        <li><a href="#32批量传递props">3.2、批量传递props</a></li>
-        <li><a href="#33对props传值做类型限制">3.3、对props传值做类型限制</a></li>
-        <li><a href="#34函数式组件使用props">3.4、函数式组件使用props</a></li>
-      </ul>
-    </li>
-    <li><a href="#4refs">4、refs</a>
-      <ul>
-        <li><a href="#41字符串形式的ref过时">4.1、字符串形式的ref（过时）</a></li>
-        <li><a href="#42回调形式的ref">4.2、回调形式的ref</a></li>
-        <li><a href="#43createref使用">4.3、createRef使用</a></li>
-      </ul>
-    </li>
-    <li><a href="#5事件处理">5、事件处理</a></li>
-    <li><a href="#6高阶函数与函数柯里化">6、高阶函数与函数柯里化</a></li>
-    <li><a href="#7组件的生命周期">7、组件的生命周期</a>
-      <ul>
-        <li><a href="#71生命周期流程图旧">7.1、生命周期流程图(旧)</a></li>
-        <li><a href="#72生命周期流程图新17以后">7.2、生命周期流程图(新，17以后)</a></li>
-        <li><a href="#73重要的勾子">7.3、重要的勾子</a></li>
-        <li><a href="#74即将废弃的勾子">7.4、即将废弃的勾子</a></li>
-      </ul>
-    </li>
-    <li><a href="#8虚拟dom与dom-diffing算法">8、虚拟DOM与DOM Diffing算法</a></li>
-  </ul>
-</nav>
-        </aside>
-
-
-                <section class="article-content typo relative flex-grow px-6 py-5 md:px-10"><i title="更快的阅读" id="bionicReading" class="absolute right-0 top-0 cursor-pointer p-3"
-                            ><svg class="w-4 h-4 fill-current text-gray-400" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10811" width="200" height="200"><path d="M480 192c-19.2 0-32-12.8-32-32v-128c0-19.2 12.8-32 32-32s32 12.8 32 32v128c0 19.2-12.8 32-32 32zM160 1024c-6.4 0-19.2 0-25.6-6.4l-128-128c0-6.4-6.4-19.2-6.4-25.6s6.4-19.2 6.4-25.6l512-512c12.8-6.4 38.4-6.4 51.2 0l128 128c0 6.4 6.4 19.2 6.4 25.6s-6.4 19.2-6.4 25.6l-512 512c-6.4 6.4-19.2 6.4-25.6 6.4z m-83.2-160l83.2 83.2 467.2-467.2-83.2-83.2-467.2 467.2zM992 576h-128c-19.2 0-32-12.8-32-32s12.8-32 32-32h128c19.2 0 32 12.8 32 32s-12.8 32-32 32zM768 288c-6.4 0-19.2 0-25.6-6.4-12.8-12.8-12.8-32 0-44.8l96-96c12.8-12.8 32-12.8 44.8 0s12.8 32 0 44.8l-96 96c0 6.4-12.8 6.4-19.2 6.4zM256 288c-6.4 0-19.2 0-25.6-6.4L134.4 185.6c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 12.8-12.8 12.8-19.2 12.8zM864 896c-6.4 0-19.2 0-25.6-6.4l-96-96c-12.8-12.8-12.8-32 0-44.8s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 6.4-12.8 6.4-19.2 6.4z" p-id="10812"></path><path d="M544 640c-6.4 0-19.2 0-25.6-6.4l-128-128c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l128 128c12.8 12.8 12.8 38.4 6.4 51.2-6.4 6.4-19.2 6.4-25.6 6.4z" p-id="10813"></path></svg></i
+    <div class="relative h-full">
+        <div class="page-view-article flex h-full flex-col bg-white dark:bg-darkFg"><div class="relative"><div>
+    <div class="-mb-2 w-full p-6 pb-0 text-3xl md:px-10">
+        React学习笔记（一）- 面向组件编程
+    </div>
+</div></div><div class="article-info border-b p-6 pb-3 text-sm dark:border-darkBorder md:px-10">
+    <div>
+        <div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+            <i class="eva eva-clock-outline mr-1"></i>
+            <span>
+                <time
+                    title="发布于：2021年08月18日 23:25:00"datetime="2021-08-18T23:25:00+08:00">2021年08月18日</time
+                >
+            </span>
+        </div><span class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+                    <i class="eva eva-edit-2-outline mr-1"></i>
+                    <span>
+                        <time
+                            title="最后修改于：2022年06月08日 14:04:21"datetime="2022-06-08T14:04:21+08:00">2022年06月08日</time
                         >
+                    </span>
+                </span><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+                <i class="eva eva-flag-outline mr-1"></i>
+                <span>阅读约 14 分钟</span>
+            </div><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+                <i class="eva eva-bar-chart-outline mr-1"></i>
+                <span>6830 字</span>
+            </div></div><div class="mb-3 flex items-center">
+            <i class="eva eva-pricetags-outline mr-1"></i>
+            <span class="mr-3">标签</span><a href="/tags/react" title="React" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">React</span>
+                </a><a href="/tags/%E5%89%8D%E7%AB%AF" title="前端" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">前端</span>
+                </a><a href="/tags/state" title="state" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">state</span>
+                </a><a href="/tags/setstate" title="setState" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">setState</span>
+                </a><a href="/tags/props" title="props" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">props</span>
+                </a><a href="/tags/refs" title="refs" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">refs</span>
+                </a></div><div class="mb-3 flex items-center">
+            <i class="eva eva-folder-outline mr-1"></i>
+            <span class="mr-3">分类</span><a href="/categories/react" title="React" class="group flex items-center text-sm">
+                    <span class="text-gray-400 group-hover:text-theme">React</span>
+                    <span class="mx-0.5 group-last:hidden">,</span>
+                </a></div></div><section class="article-content typo relative flex-grow px-6 py-5 md:px-10"><i title="更快的阅读" id="bionicReading" class="absolute right-0 top-0 cursor-pointer p-3"
+            ><svg class="w-4 h-4 fill-current text-gray-400" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10811" width="200" height="200"><path d="M480 192c-19.2 0-32-12.8-32-32v-128c0-19.2 12.8-32 32-32s32 12.8 32 32v128c0 19.2-12.8 32-32 32zM160 1024c-6.4 0-19.2 0-25.6-6.4l-128-128c0-6.4-6.4-19.2-6.4-25.6s6.4-19.2 6.4-25.6l512-512c12.8-6.4 38.4-6.4 51.2 0l128 128c0 6.4 6.4 19.2 6.4 25.6s-6.4 19.2-6.4 25.6l-512 512c-6.4 6.4-19.2 6.4-25.6 6.4z m-83.2-160l83.2 83.2 467.2-467.2-83.2-83.2-467.2 467.2zM992 576h-128c-19.2 0-32-12.8-32-32s12.8-32 32-32h128c19.2 0 32 12.8 32 32s-12.8 32-32 32zM768 288c-6.4 0-19.2 0-25.6-6.4-12.8-12.8-12.8-32 0-44.8l96-96c12.8-12.8 32-12.8 44.8 0s12.8 32 0 44.8l-96 96c0 6.4-12.8 6.4-19.2 6.4zM256 288c-6.4 0-19.2 0-25.6-6.4L134.4 185.6c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 12.8-12.8 12.8-19.2 12.8zM864 896c-6.4 0-19.2 0-25.6-6.4l-96-96c-12.8-12.8-12.8-32 0-44.8s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 6.4-12.8 6.4-19.2 6.4z" p-id="10812"></path><path d="M544 640c-6.4 0-19.2 0-25.6-6.4l-128-128c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l128 128c12.8 12.8 12.8 38.4 6.4 51.2-6.4 6.4-19.2 6.4-25.6 6.4z" p-id="10813"></path></svg></i
+        >
 
 <h2 class="group " id="1基本理解和使用"
     >1、基本理解和使用<a href="#1%e5%9f%ba%e6%9c%ac%e7%90%86%e8%a7%a3%e5%92%8c%e4%bd%bf%e7%94%a8"
@@ -1871,16 +1810,17 @@
             <span>上一篇</span>
         </a>
     </div><div class="hidden items-center text-xs xl:flex">
-    除特殊声明外，本博客一律使用以下协议进行授权 「
-    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener noreferrer" class="text-theme">署名 - 非商业性使用 - 禁止演绎 4.0</a>
-    」
-</div>
-<div class="flex items-center text-sm xl:hidden">
-    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener noreferrer" class="text-theme">
-        <img src="/Cc-by-nc-nd.svg" alt="署名 - 非商业性使用 - 禁止演绎 4.0" title="署名 - 非商业性使用 - 禁止演绎 4.0" class="w-24" />
-    </a>
-</div>
-<a
+        除特殊声明外，本博客一律使用以下协议进行授权 「
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener noreferrer" class="text-theme">署名 - 非商业性使用 - 禁止演绎 4.0</a>
+        」
+    </div>
+    <div class="flex items-center text-sm xl:hidden">
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener noreferrer" class="text-theme">
+            <img src="/Cc-by-nc-nd.svg" alt="署名 - 非商业性使用 - 禁止演绎 4.0" title="署名 - 非商业性使用 - 禁止演绎 4.0" class="w-24" />
+        </a>
+    </div>
+
+    <a
         href=""
         title=""
         class="invisible flex cursor-pointer items-center text-gray-500 transition duration-300 ease-[ease] hover:text-theme dark:text-darkTextPlaceholder dark:hover:text-darkText">
@@ -1892,9 +1832,9 @@
 </div>
 
 
-            </div>
         </div>
     </div>
+</div>
 </div>
                 </main><footer>
     <div
@@ -1910,17 +1850,7 @@
                 </a><a data-no-swup href="https://wei.su/sitemap.xml" target="_blank" class="mr-1.5 hover:text-theme">
                     <span class=" md:hidden lg:inline"><svg t="1650887940556" class="mr-0.5 w-3 fill-current text-inherit inline-block align-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6291"><path d="M950.044 625.778h-68.266v-56.89c0-45.51-39.822-85.332-85.334-85.332h-256v-85.334h68.267c39.822 0 73.956-34.133 73.956-73.955V130.844c0-39.822-34.134-73.955-73.956-73.955H415.29c-39.822 0-73.956 34.133-73.956 73.955v193.423c0 39.822 34.134 73.955 73.956 73.955h68.267v85.334h-256c-45.512 0-85.334 39.822-85.334 85.333v56.889H73.956C34.133 625.778 0 659.91 0 699.733v193.423c0 39.822 34.133 73.955 73.956 73.955h193.422c39.822 0 73.955-34.133 73.955-73.955V699.733c0-39.822-34.133-73.955-73.955-73.955H199.11v-56.89c0-17.066 11.378-28.444 28.445-28.444h568.888c17.067 0 28.445 11.378 28.445 28.445v56.889h-68.267c-39.822 0-73.955 34.133-73.955 73.955v193.423c0 39.822 34.133 73.955 73.955 73.955h193.422c39.823 0 73.956-34.133 73.956-73.955V699.733c0-39.822-34.133-73.955-73.956-73.955z" p-id="6292"></path></svg></span>
                     <span>Sitemap</span>
-                </a></div><div id="run-time" class="mt-2 flex-grow text-right md:mt-0">
-    <span>运行时间： </span><b id="run-time-d">0</b>
-    <span class="text-xs">天</span>
-    <b id="run-time-h">0</b>
-    <span class="text-xs">小时</span>
-    <b id="run-time-m">0</b>
-    <span class="text-xs">分钟</span>
-    <b id="run-time-s">0</b>
-    <span class="text-xs">秒</span>
-</div>
-</div>
+                </a></div></div>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -1941,7 +1871,15 @@ window.__theme = {
     lang: 'zh-cn',
     imageZoom: true ,
     lazyload: true ,
-    bionicReading: true ,
+    bionicReading: {
+        enabled: true ,
+        skipLinks: false ,
+        autoBionic: false ,
+        excludeWords:[],
+        excludeClasses:["github"],
+        excludeNodeNames:[],
+    },
+    katex: true ,
     backtop: true ,
     pangu: true ,
     autoDarkMode: true ,
@@ -1962,9 +1900,9 @@ window.__theme = {
         searchLoadFailure: "初始化搜索引擎失败",
         searchInput: "请输入内容",
         searchResults: (results, keyword) =>`关键字 <span class="text-theme">${keyword}</span> 中共找到 <span class="text-theme">${results}</span> 条结果`,
-    },creatTime: "2019\/06\/06"}
+    },}
 </script>
-<script type="text/javascript" src="/ts/main.7daa6d687f74a464709635915f7e2704ba80b4d59196e1d6e700cf910af70392.js" defer integrity="sha256-faptaH90pGRwljWRX34nBLqAtNWRluHW5wDPkQr3A5I="></script><script>
+<script type="text/javascript" src="/ts/main.faea1d2c2473489faed6dcc6b945d0378dde4214ffc9e65eb7a1d10f16abb886.js" defer integrity="sha256-&#43;uodLCRzSJ&#43;u1tzGuUXQN43eQhT/yeZet6HRDxaruIY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Procedure on Wk's Blog</title><link>https://blog.wk.mk/tags/procedure/</link><description>Recent content in Procedure on Wk's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 04 Sep 2018 14:25:00 +0800</lastBuildDate><atom:link href="https://blog.wk.mk/tags/procedure/index.xml" rel="self" type="application/rss+xml"/><item><title>存储过程</title><link>https://blog.wk.mk/p/learn-procedure/</link><pubDate>Tue, 04 Sep 2018 14:25:00 +0800</pubDate><guid>https://blog.wk.mk/p/learn-procedure/</guid><description>&lt;img src="https://unsplash.it/1600/900?random" alt="Featured image of post 存储过程" />&lt;p>公司的项目使用到了存储过程，由于此前在学校从未接触到，因此记录下学习笔记。&lt;/p>
+&lt;h2 id="什么是存储过程">什么是存储过程
+&lt;/h2>&lt;p>存储过程（Stored Procedure）是在大型数据库系统中，一组为了完成特定功能的SQL 语句集，存储在数据库中，经过第一次编译后再次调用不需要再次编译，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它。&lt;/p>
+&lt;h2 id="使用存储过程的优点">使用存储过程的优点
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>存储过程只在创造时进行编译，以后每次执行存储过程都不需再重新编译，而一般SQL语句每执行一次就编译一次,所以使用存储过程可提高数据库执行速度。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>当对数据库进行复杂操作时，可将此复杂操作用存储过程封装起来与数据库提供的事务处理结合一起使用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>存储过程可以重复使用,可减少数据库开发人员的工作量。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>安全性高,可设定只有某些用户才具有对指定存储过程的使用权。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="简单例子">简单例子
+&lt;/h2>&lt;h3 id="基本语法">基本语法
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">--------------创建存储过程-----------------
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="k">OR&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">REPLACE&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">PROCEDURE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">procedure_name&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">参数列表&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">AS&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">-- as不可以省略，也可以用is
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c1">--PL/SQL体部分
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">END&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">procedure_name&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c1">--------------调用存储过程-----------------
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">EXECUTE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procedure_name&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">--存储过程如果有参数，后面加参数格式为：@参数名=value，也可直接为参数值value
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c1">--------------删除存储过程-----------------
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">drop&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">procedure&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">procedure_name&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c1">--在存储过程中能调用另外一个存储过程，而不能删除另外一个存储过程
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>存储过程或者存储函数，只能创建或者替换。&lt;/li>
+&lt;li>参数可以带也可以不带。&lt;/li>
+&lt;/ul>
+&lt;h3 id="不带参数的存储过程">不带参数的存储过程
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">OR&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">REPLACE&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">procedure&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">as&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">begin&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">dbms_output&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">put_line&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;HelloWorld&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">end&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="带参数的存储过程">带参数的存储过程
+&lt;/h3>&lt;p>给指定的员工涨100元工资,并且打印涨前和涨后的薪水:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">create&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">or&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">replace&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">procedure&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pempno&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">in&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">emp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">empno&lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="k">type&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">as&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">pename&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">emp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ename&lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="k">type&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">beforesal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">emp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sal&lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="k">type&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">aftersal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">emp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sal&lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="k">type&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">begin&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">select&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">ename&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">sal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">into&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">pename&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">beforesal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">from&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">emp&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">where&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">empno&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">pempno&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">aftersal&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">beforesal&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">update&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">emp&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">set&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">sal&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">aftersal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">where&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">empno&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">pempno&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">dbms_output&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">put_line&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;姓名: &amp;#39;&lt;/span>&lt;span class="o">||&lt;/span>&lt;span class="n">pename&lt;/span>&lt;span class="o">||&lt;/span>&lt;span class="s1">&amp;#39; 涨前工资:&amp;#39;&lt;/span>&lt;span class="o">||&lt;/span>&lt;span class="n">beforesal&lt;/span>&lt;span class="o">||&lt;/span>&lt;span class="s1">&amp;#39;涨后工资:&amp;#39;&lt;/span>&lt;span class="o">||&lt;/span>&lt;span class="n">aftersal&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">end&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>注意&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>要明确说明参数是输入参数（&lt;strong>in&lt;/strong>)还是输出参数（&lt;strong>out&lt;/strong>)&lt;/li>
+&lt;li>为保证调用多个存储过程中处在同一个事务中，所以一般不在存储过程或者存储函数中，commit或rollback&lt;/li>
+&lt;/ul>
+&lt;h3 id="调用执行方式">调用执行方式
+&lt;/h3>&lt;ol>
+&lt;li>&lt;code>exec&lt;/code>命令
+exec是SQLPlus命令，&lt;strong>只能在SQLPlus中使用&lt;/strong>，exec可以直接跟存储过程名（可以省略括号）&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">SQL&amp;gt; &lt;span class="nb">set&lt;/span> serveroutput on&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SQL&amp;gt; &lt;span class="nb">exec&lt;/span> test&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>使用&lt;code>call&lt;/code>命令
+在SQL中使用&lt;code>call&lt;/code>调用存储过程时，需要带上括号，不限制使用场景&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">SQL&amp;gt; &lt;span class="nb">set&lt;/span> serveroutput on&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SQL&amp;gt; call test&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>使用PLSQL语句调用&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">SQL&amp;gt; &lt;span class="nb">set&lt;/span> serveroutput on&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SQL&amp;gt; begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> test&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

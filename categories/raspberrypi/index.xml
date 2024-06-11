@@ -1,20 +1,222 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>RaspberryPi on Wei&#39;s Blog</title>
-    <link>https://wei.su/categories/raspberrypi/</link>
-    <description>Recent content in RaspberryPi on Wei&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Mon, 09 Sep 2019 22:00:00 +0800</lastBuildDate><atom:link href="https://wei.su/categories/raspberrypi/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Raspberry Pi编译安装OpenCV4</title>
-      <link>https://wei.su/2019/09/09/raspberry-pi-compile-install-opencv4.html/</link>
-      <pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate>
-      
-      <guid>https://wei.su/2019/09/09/raspberry-pi-compile-install-opencv4.html/</guid>
-      <description>在树莓派上编译安装OpenCV4流程记录</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RaspberryPi on Wk's Blog</title><link>https://blog.wk.mk/categories/raspberrypi/</link><description>Recent content in RaspberryPi on Wk's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 09 Sep 2019 22:00:00 +0800</lastBuildDate><atom:link href="https://blog.wk.mk/categories/raspberrypi/index.xml" rel="self" type="application/rss+xml"/><item><title>Raspberry Pi编译安装OpenCV4</title><link>https://blog.wk.mk/p/raspberry-pi-compile-install-opencv4/</link><pubDate>Mon, 09 Sep 2019 22:00:00 +0800</pubDate><guid>https://blog.wk.mk/p/raspberry-pi-compile-install-opencv4/</guid><description>&lt;img src="https://blog.wk.mk/p/raspberry-pi-compile-install-opencv4/cover.jpg" alt="Featured image of post Raspberry Pi编译安装OpenCV4" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>因为最近准备往树莓派上放一个基于OpenCV的项目，在PC上测试没有问题后放在树莓派上&lt;code>pip install -r requirements.txt&lt;/code>的时候却提示：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ERROR: Could not find a version that satisfies the requirement opencv-python (from versions: none)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ERROR: No matching distribution found for opencv-python
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>再去网上搜索后才发现&lt;code>opencv-python&lt;/code>这个库并没有提供ARM架构的二进制包。不过偶然发现还有一个专门为树莓派提供的&lt;a class="link" href="https://www.piwheels.org" target="_blank" rel="noopener"
+>第三方依赖库&lt;/a>，可是这里目前只提供基于Python3.5且版本号太低无法满足我当前项目的要求，那接下来就只剩下源码自己独立编译这条路了。&lt;/p>
+&lt;h2 id="环境准备">环境准备
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>Python3.7.4&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>需要安装Numpy：&lt;code>pip install numpy&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>扩展文件系统&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>输入 &lt;code>sudo raspi-config&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>选择 &lt;code>Advanced Options&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>选择 &lt;code>Expand Filesystem&lt;/code>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>扩充Swap&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>编辑文件：&lt;code>sudo vi /etc/dphys-swapfile&lt;/code>，将&lt;code>CONF_SWAPSIZE&lt;/code>的值修改成&lt;code>2048&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>重启dphys-swapfile：&lt;code>sudo /etc/init.d/dphys-swapfile restart&lt;/code>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>更新系统的包&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>在系统中安装相关依赖&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo apt-get install build-essential cmake unzip pkg-config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install libxvidcore-dev libx264-dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install libgtk-3-dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install libcanberra-gtk*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install libatlas-base-dev gfortran
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install python3-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>下载源码并解压&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wget -O opencv_contrib.zip https://codeload.github.com/opencv/opencv_contrib/zip/4.1.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">unzip opencv.zip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">unzip opencv_contrib.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="编译安装">编译安装
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>在&lt;code>opencv-4.1.1&lt;/code>中创建&lt;code>build&lt;/code>文件夹，用于存放源码编译后的产物&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> opencv-4.1.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir build
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>配置CMake参数&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo cmake -D &lt;span class="nv">CMAKE_BUILD_TYPE&lt;/span>&lt;span class="o">=&lt;/span>RELEASE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">CMAKE_INSTALL_PREFIX&lt;/span>&lt;span class="o">=&lt;/span>/usr/local
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">OPENCV_EXTRA_MODULES_PATH&lt;/span>&lt;span class="o">=&lt;/span>/home/pi/opencv/opencv_contrib-4.1.1/modules
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">ENABLE_NEON&lt;/span>&lt;span class="o">=&lt;/span>ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">ENABLE_VFPV3&lt;/span>&lt;span class="o">=&lt;/span>ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">WITH_FFMPEG&lt;/span>&lt;span class="o">=&lt;/span>ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">INSTALL_PYTHON_EXAMPLES&lt;/span>&lt;span class="o">=&lt;/span>ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">WITH_GSTREAMER&lt;/span>&lt;span class="o">=&lt;/span>ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">OPENCV_EXTRA_EXE_LINKER_FLAGS&lt;/span>&lt;span class="o">=&lt;/span>-latomic
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-D &lt;span class="nv">BUILD_EXAMPLES&lt;/span>&lt;span class="o">=&lt;/span>ON ..
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>在CMake检查结束后，会打印出详细的信息，需要检查其中&lt;code>Python3&lt;/code>部分的各个参数是否都有值。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>确认没问题后即开始编译OpenCV，建议可以在这时候使用&lt;code>screen&lt;/code>命令创建一个可以在后台持续执行的会话。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>可以在make后增加&lt;code>-j2&lt;/code>参数指定使用2个核心参与编译，这里使用单核编译，即不加任何参数。敲完命令后就需要等待大约七八小时后才能完成（Raspberry Pi 3B）&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>编译结束并且没有报错信息后，需要修改一下配置，&lt;code>modules/python3/CMakeFiles/opencv_python3.dir/link.txt&lt;/code>中第一行增加&lt;code>-latomic&lt;/code>参数&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">vi build/modules/python3/CMakeFiles/opencv_python3.dir/link.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在第一行中的起始中 &lt;code>/usr/bin/c++ -fPIC -fsigned-char -W -Wall&lt;/code> 修改为 &lt;code>/usr/bin/c++ -fPIC -latomic -fsigned-char -W -Wall&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>安装OpenCV&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo make install
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo ldconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="检查安装结果">检查安装结果
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="err">$&lt;/span> &lt;span class="n">python&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Python&lt;/span> &lt;span class="mf">3.7.4&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">default&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Sep&lt;/span> &lt;span class="mi">8&lt;/span> &lt;span class="mi">2019&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">06&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">39&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">GCC&lt;/span> &lt;span class="mf">8.3.0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Type&lt;/span> &lt;span class="s2">&amp;#34;help&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;copyright&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;credits&amp;#34;&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="s2">&amp;#34;license&amp;#34;&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">more&lt;/span> &lt;span class="n">information&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="nn">cv2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">__version__&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">&amp;#39;4.1.1&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="参考链接">参考链接
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://goldensoap.github.io/2018/10/20/%E3%80%90%E6%A0%91%E8%8E%93%E6%B4%BE%E3%80%91%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85opencv/" target="_blank" rel="noopener"
+>【树莓派】编译安装opencv+python调用&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://www.pyimagesearch.com/2018/09/26/install-opencv-4-on-your-raspberry-pi/" target="_blank" rel="noopener"
+>Install OpenCV 4 on your Raspberry Pi&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -1,0 +1,1194 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="React学习笔记"><title>React学习笔记（一）- 面向组件编程</title>
+<link rel=canonical href=https://blog.wk.mk/p/react-1/><link rel=stylesheet href=/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css><meta property='og:title' content="React学习笔记（一）- 面向组件编程"><meta property='og:description' content="React学习笔记"><meta property='og:url' content='https://blog.wk.mk/p/react-1/'><meta property='og:site_name' content="Wk's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='React'><meta property='article:tag' content='前端'><meta property='article:tag' content='state'><meta property='article:tag' content='setState'><meta property='article:tag' content='props'><meta property='article:tag' content='refs'><meta property='article:published_time' content='2021-08-18T23:25:00+08:00'><meta property='article:modified_time' content='2021-08-18T23:25:00+08:00'><meta property='og:image' content='https://blog.wk.mk/p/react-1/cover.jpg'><meta name=twitter:title content="React学习笔记（一）- 面向组件编程"><meta name=twitter:description content="React学习笔记"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://blog.wk.mk/p/react-1/cover.jpg'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><div class=site-meta><h1 class=site-name><a href=/>Wk's Blog</a></h1><h2 class=site-description></h2></div></header><ol class=menu-social><li><a href=mailto:blog@wk.mk target=_blank title=Email rel=me><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://github.com/kbj target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>回档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1基本理解和使用>1、基本理解和使用</a><ol><li><a href=#函数式组件>函数式组件</a></li><li><a href=#类式组件>类式组件</a></li></ol></li><li><a href=#2state>2、State</a><ol><li><a href=#21setstate>2.1、setState</a><ol><li><a href=#对象式的setstate>对象式的setState</a></li><li><a href=#函数式的setstate>函数式的setState</a></li><li><a href=#总结>总结</a></li></ol></li></ol></li><li><a href=#3props>3、props</a><ol><li><a href=#31基本使用>3.1、基本使用</a></li><li><a href=#32批量传递props>3.2、批量传递props</a></li><li><a href=#33对props传值做类型限制>3.3、对props传值做类型限制</a></li><li><a href=#34函数式组件使用props>3.4、函数式组件使用props</a></li></ol></li><li><a href=#4refs>4、refs</a><ol><li><a href=#41字符串形式的ref过时>4.1、字符串形式的ref（过时）</a></li><li><a href=#42回调形式的ref>4.2、回调形式的ref</a></li><li><a href=#43createref使用>4.3、createRef使用</a></li></ol></li><li><a href=#5事件处理>5、事件处理</a></li><li><a href=#6高阶函数与函数柯里化>6、高阶函数与函数柯里化</a></li><li><a href=#7组件的生命周期>7、组件的生命周期</a><ol><li><a href=#71生命周期流程图旧>7.1、生命周期流程图(旧)</a></li><li><a href=#72生命周期流程图新17以后>7.2、生命周期流程图(新，17以后)</a></li><li><a href=#73重要的勾子>7.3、重要的勾子</a></li><li><a href=#74即将废弃的勾子>7.4、即将废弃的勾子</a></li></ol></li><li><a href=#8虚拟dom与dom-diffing算法>8、虚拟DOM与DOM Diffing算法</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/react-1/><img src=/p/react-1/cover_hud7e36f7e20e71be184458283bdae4646_55974_800x0_resize_q75_box.jpg srcset="/p/react-1/cover_hud7e36f7e20e71be184458283bdae4646_55974_800x0_resize_q75_box.jpg 800w, /p/react-1/cover_hud7e36f7e20e71be184458283bdae4646_55974_1600x0_resize_q75_box.jpg 1600w" width=800 height=534 loading=lazy alt="Featured image of post React学习笔记（一）- 面向组件编程"></a></div><div class=article-details><header class=article-category><a href=/categories/react/>React</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/react-1/>React学习笔记（一）- 面向组件编程</a></h2><h3 class=article-subtitle>React学习笔记</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2021/08/18</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 14 分钟</time></div></footer></div></header><section class=article-content><h2 id=1基本理解和使用>1、基本理解和使用</h2><h3 id=函数式组件>函数式组件</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>html</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;en&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;UTF-8&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>http</span><span class=err>-</span><span class=na>equiv</span><span class=o>=</span><span class=s>&#34;X-UA-Compatible&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;IE=edge&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;viewport&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;width=device-width, initial-scale=1.0&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>title</span><span class=p>&gt;</span><span class=nx>函数式组件</span><span class=p>&lt;/</span><span class=nt>title</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;test&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>引入核心库</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/react.development.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>引入react</span><span class=o>-</span><span class=nx>dom</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/react-dom.development.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>引入babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/babel.min.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>此处一定写babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 1.创建函数式组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=kd>function</span> <span class=nx>MyComponent</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span><span class=nx>我是用函数定义的组件</span><span class=err>（</span><span class=nx>适用于</span><span class=err>【</span><span class=nx>简单组件</span><span class=err>】</span><span class=nx>的定义</span><span class=err>）</span><span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>MyComponent</span> <span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=类式组件>类式组件</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>html</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;en&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;UTF-8&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>http</span><span class=err>-</span><span class=na>equiv</span><span class=o>=</span><span class=s>&#34;X-UA-Compatible&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;IE=edge&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;viewport&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;width=device-width, initial-scale=1.0&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>title</span><span class=p>&gt;</span><span class=nx>函数式组件</span><span class=p>&lt;/</span><span class=nt>title</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;test&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>引入核心库</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/react.development.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>引入react</span><span class=o>-</span><span class=nx>dom</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/react-dom.development.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>引入babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/babel.min.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--</span> <span class=nx>此处一定写babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 1.创建类式组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=kr>class</span> <span class=nx>MyComponent</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span><span class=nx>我是用类定义的组件</span><span class=err>（</span><span class=nx>适用于</span><span class=err>【</span><span class=nx>复杂组件</span><span class=err>】</span><span class=nx>的定义</span><span class=err>）</span><span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>MyComponent</span> <span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=2state>2、State</h2><ul><li><p>state是组件对象最重要的属性, 值是对象(可以包含多个key-value的组合)</p></li><li><p>组件被称为"状态机", 通过更新组件的state来更新对应的页面显示(重新渲染组件)</p></li><li><p>组件中render方法中的this为组件实例对象</p></li><li><p>组件自定义的方法中this为undefined，如何解决？</p><ul><li>强制绑定this: 通过函数对象的bind()</li><li>箭头函数</li></ul></li><li><p><strong>状态数据，不能直接修改或更新</strong> ，用setState更新，<strong>是合并的动作</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=c>&lt;!--</span> <span class=nx>此处一定写babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 1.创建类式组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kr>class</span> <span class=nx>MyComponent</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	    <span class=c1>// 初始化状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>	    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	      <span class=nx>isHot</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	    <span class=p>}</span>
+</span></span><span class=line><span class=cl>	    <span class=c1>// 类组件获取this指向当前组件的方法一：将changeWeather绑定上this后生成新的方法重新赋值给changeWeather
+</span></span></span><span class=line><span class=cl><span class=c1></span>	    <span class=k>this</span><span class=p>.</span><span class=nx>changeWeather</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>changeWeather</span><span class=p>.</span><span class=nx>bind</span><span class=p>(</span><span class=k>this</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	      <span class=p>&lt;</span><span class=nt>h2</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>changeWeather</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>	        <span class=nx>今天天气很</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>isHot</span> <span class=o>?</span> <span class=s1>&#39;炎热&#39;</span> <span class=o>:</span> <span class=s1>&#39;凉爽&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	      <span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	    <span class=p>)</span>
+</span></span><span class=line><span class=cl>	  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	  <span class=c1>//changeweather放在哪里？——Weather的原型对象上，供实例使用
+</span></span></span><span class=line><span class=cl><span class=c1></span>	  <span class=c1>//由于changeleather是作为onClick的回调，所以不是通过实例调用的，是直接调用
+</span></span></span><span class=line><span class=cl><span class=c1></span>	  <span class=c1>//类中的方法默认开启了局部的严格模式，所以changeweather中的this为undefined
+</span></span></span><span class=line><span class=cl><span class=c1></span>	  <span class=nx>changeWeather</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	    <span class=c1>// 严重注意，state不可以直接更改，比如以下
+</span></span></span><span class=line><span class=cl><span class=c1></span>	    <span class=c1>// this.state.isHot = !this.state.isHot
+</span></span></span><span class=line><span class=cl><span class=c1></span>	    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span> <span class=nx>isHot</span><span class=o>:</span> <span class=o>!</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>isHot</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>	  <span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>MyComponent</span> <span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>setState引起组件的后续动作是异步的！！！！！！</strong></p></li></ul><hr><p><strong>精简代码写法</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=c>&lt;!--</span> <span class=nx>此处一定写babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 1.创建类式组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>class</span> <span class=nx>MyComponent</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 初始化状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>state</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>isHot</span><span class=o>:</span> <span class=kc>true</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>h2</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>changeWeather</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=nx>今天天气很</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>isHot</span> <span class=o>?</span> <span class=s1>&#39;炎热&#39;</span> <span class=o>:</span> <span class=s1>&#39;凉爽&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 自定义方法：赋值语句+箭头函数 
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>changeWeather</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span> <span class=nx>isHot</span><span class=o>:</span> <span class=o>!</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>isHot</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>MyComponent</span> <span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=21setstate>2.1、setState</h3><p><strong>setState更新状态的2种写法</strong></p><h4 id=对象式的setstate>对象式的setState</h4><p><code>setState(stateChange, [callback])</code></p><ul><li>stateChange为状态改变对象(该对象可以体现出状态的更改)</li><li>callback是可选的回调函数, 它在状态更新完毕、界面也更新后(render调用后)才被调用</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span><span class=p>,</span> <span class=p>{</span><span class=nx>Component</span><span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;react&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>Demo</span> <span class=kr>extends</span> <span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>state</span> <span class=o>=</span> <span class=p>{</span><span class=nx>count</span><span class=o>:</span> <span class=mi>0</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>add</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=p>{</span><span class=nx>count</span><span class=p>}</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>state</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 更新状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span><span class=nx>count</span><span class=o>:</span> <span class=nx>count</span> <span class=o>+</span> <span class=mi>1</span><span class=p>},</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 改完状态、render执行完的回调
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>count</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span><span class=nx>当前求和为</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>count</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>add</span><span class=p>}&gt;</span><span class=nx>点我</span><span class=o>+</span><span class=mi>1</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=函数式的setstate>函数式的setState</h4><p><code>setState(updater, [callback])</code></p><ul><li>updater为返回stateChange对象的函数</li><li>updater可以接收到state和props</li><li>callback是可选的回调函数, 它在状态更新、界面也更新后(render调用后)才被调用</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span><span class=p>,</span> <span class=p>{</span><span class=nx>Component</span><span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;react&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>Demo</span> <span class=kr>extends</span> <span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>state</span> <span class=o>=</span> <span class=p>{</span><span class=nx>count</span><span class=o>:</span> <span class=mi>0</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>add</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 对象式的setState
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// const {count} = this.state
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// // 更新状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// this.setState({count: count + 1}, () =&gt; {
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>//   // 改完状态、render执行完的回调
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>//   console.log(this.state.count)
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// })
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 函数式setState
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>((</span><span class=nx>state</span><span class=p>,</span> <span class=nx>props</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>{</span><span class=nx>count</span><span class=o>:</span> <span class=nx>state</span><span class=p>.</span><span class=nx>count</span> <span class=o>+</span> <span class=mi>1</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 改完状态、render执行完的回调
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>count</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span><span class=nx>当前求和为</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>count</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>add</span><span class=p>}&gt;</span><span class=nx>点我</span><span class=o>+</span><span class=mi>1</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=总结>总结</h4><ol><li>对象式的setState是函数式的setState的简写方式(语法糖)</li><li>使用原则：<ol><li>如果新状态不依赖于原状态 ===> 使用对象方式</li><li>如果新状态依赖于原状态 ===> 使用函数方式</li><li>如果需要在setState()执行后获取最新的状态数据，要在第二个callback函数中读取</li></ol></li></ol><h2 id=3props>3、props</h2><ul><li>props是只读的</li><li>标签体的内容也是可以通过props中的children属性拿到，是一种特殊的标签属性</li></ul><hr><h3 id=31基本使用>3.1、基本使用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=c>&lt;!--</span> <span class=nx>此处一定写babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>class</span> <span class=nx>Person</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>作者</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>性别</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>sex</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>年龄</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>age</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>Person</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;tom&#34;</span> <span class=na>age</span><span class=o>=</span><span class=s>&#34;18&#34;</span> <span class=na>sex</span><span class=o>=</span><span class=s>&#34;女&#34;</span> <span class=p>/&gt;,</span>
+</span></span><span class=line><span class=cl>    <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=32批量传递props>3.2、批量传递props</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=c>&lt;!--</span> <span class=nx>此处一定写babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>class</span> <span class=nx>Person</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>作者</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>性别</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>sex</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>年龄</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>age</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>const</span> <span class=nx>p</span> <span class=o>=</span> <span class=p>{</span><span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;老刘&#39;</span><span class=p>,</span> <span class=nx>age</span><span class=o>:</span><span class=mi>18</span><span class=p>,</span> <span class=nx>sex</span><span class=o>:</span> <span class=s1>&#39;女&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Person</span> <span class=p>{</span><span class=na>...p</span><span class=p>}</span> <span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=33对props传值做类型限制>3.3、对props传值做类型限制</h3><ul><li>需要引入prop-types.js</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;test&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c>&lt;!--</span> <span class=nx>引入核心库</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/react.development.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c>&lt;!--</span> <span class=nx>引入react</span><span class=o>-</span><span class=nx>dom</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/react-dom.development.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c>&lt;!--</span> <span class=nx>引入babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/babel.min.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c>&lt;!--</span> <span class=nx>引入prop</span><span class=o>-</span><span class=nx>types</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;../js/prop-types.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c>&lt;!--</span> <span class=nx>此处一定写babel</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=kr>class</span> <span class=nx>Person</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>作者</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>性别</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>sex</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>年龄</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>age</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 设置入参格式
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>Person</span><span class=p>.</span><span class=nx>propTypes</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 限制只能字符串，且必传
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>name</span><span class=o>:</span> <span class=nx>PropTypes</span><span class=p>.</span><span class=nx>string</span><span class=p>.</span><span class=nx>isRequired</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>age</span><span class=o>:</span> <span class=nx>PropTypes</span><span class=p>.</span><span class=nx>number</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 设置默认值
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>Person</span><span class=p>.</span><span class=nx>defaultProps</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>sex</span><span class=o>:</span> <span class=s1>&#39;无&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kr>const</span> <span class=nx>p</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;老刘&#39;</span><span class=p>,</span> <span class=nx>age</span><span class=o>:</span> <span class=mi>18</span><span class=p>,</span> <span class=nx>sex</span><span class=o>:</span> <span class=s1>&#39;女&#39;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Person</span> <span class=p>{</span><span class=na>...p</span><span class=p>}</span> <span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>props简写：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>class</span> <span class=nx>Person</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 设置入参格式
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kr>static</span> <span class=nx>propTypes</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 限制只能字符串，且必传
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>name</span><span class=o>:</span> <span class=nx>PropTypes</span><span class=p>.</span><span class=nx>string</span><span class=p>.</span><span class=nx>isRequired</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>age</span><span class=o>:</span> <span class=nx>PropTypes</span><span class=p>.</span><span class=nx>number</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 设置默认值
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kr>static</span> <span class=nx>defaultProps</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>sex</span><span class=o>:</span> <span class=s1>&#39;无&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>作者</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>性别</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>sex</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>年龄</span><span class=err>：</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>age</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>const</span> <span class=nx>p</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;老刘&#39;</span><span class=p>,</span> <span class=nx>age</span><span class=o>:</span> <span class=mi>18</span><span class=p>,</span> <span class=nx>sex</span><span class=o>:</span> <span class=s1>&#39;女&#39;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Person</span> <span class=p>{</span><span class=na>...p</span><span class=p>}</span> <span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=34函数式组件使用props>3.4、函数式组件使用props</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 1.创建函数式组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kd>function</span> <span class=nx>Person</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>作者</span><span class=err>：</span><span class=p>{</span><span class=nx>props</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>性别</span><span class=err>：</span><span class=p>{</span><span class=nx>props</span><span class=p>.</span><span class=nx>sex</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;</span><span class=nx>年龄</span><span class=err>：</span><span class=p>{</span><span class=nx>props</span><span class=p>.</span><span class=nx>age</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染组件到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>Person</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;jery&#34;</span> <span class=na>age</span><span class=o>=</span><span class=p>{</span><span class=mi>18</span><span class=p>}</span> <span class=na>sex</span><span class=o>=</span><span class=s>&#34;女&#34;</span> <span class=p>/&gt;,</span>
+</span></span><span class=line><span class=cl>    <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=4refs>4、refs</h2><ul><li>组件内的标签可以定义ref属性来标识自己</li></ul><hr><h3 id=41字符串形式的ref过时>4.1、字符串形式的ref（过时）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 创建组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>class</span> <span class=nx>Demo</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>showData</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>alert</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>refs</span><span class=p>.</span><span class=nx>input1</span><span class=p>.</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>showData2</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kr>const</span> <span class=p>{</span><span class=nx>input2</span><span class=p>}</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>refs</span>
+</span></span><span class=line><span class=cl>      <span class=nx>alert</span><span class=p>(</span><span class=nx>input2</span><span class=p>.</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>input</span> <span class=na>ref</span><span class=o>=</span><span class=s>&#34;input1&#34;</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;点击按钮提示数据&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>button</span> <span class=na>ref</span><span class=o>=</span><span class=s>&#34;button1&#34;</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>showData</span><span class=p>}&gt;</span><span class=nx>点我提示左侧数据</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span><span class=o>&amp;</span><span class=nx>nbsp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>input</span> <span class=na>ref</span><span class=o>=</span><span class=s>&#34;input2&#34;</span> <span class=na>onBlur</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>showData2</span><span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;失去焦点提示数据&#34;</span> <span class=p>/&gt;</span><span class=o>&amp;</span><span class=nx>nbsp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染虚拟dom到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Demo</span><span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=42回调形式的ref>4.2、回调形式的ref</h3><ul><li>如果ref回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数null，然后第二次会传入参数DOM元素。这是因为在每次渲染时会创建一个新的函数实例，所以React 清空旧的ref并且设置新的。通过<strong>将ref的回调函数定义成class的绑定函数</strong>的方式可以避免上述问题，但是大多数情况下它是无关紧要的。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 创建组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>class</span> <span class=nx>Demo</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>showData</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>alert</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>input1</span><span class=p>.</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>showData2</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kr>const</span> <span class=p>{</span><span class=nx>input2</span><span class=p>}</span> <span class=o>=</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl>      <span class=nx>alert</span><span class=p>(</span><span class=nx>input2</span><span class=p>.</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>{</span><span class=cm>/* 内联回调函数方式获取ref */</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>input</span> <span class=na>ref</span><span class=o>=</span><span class=p>{</span><span class=nx>currentNode</span> <span class=p>=&gt;</span> <span class=k>this</span><span class=p>.</span><span class=nx>input1</span> <span class=o>=</span> <span class=nx>currentNode</span><span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;点击按钮提示数据&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>showData</span><span class=p>}&gt;</span><span class=nx>点我提示左侧数据</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span><span class=o>&amp;</span><span class=nx>nbsp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>input</span> <span class=na>ref</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>saveInput</span><span class=p>}</span> <span class=na>onBlur</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>showData2</span><span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;失去焦点提示数据&#34;</span> <span class=p>/&gt;</span><span class=o>&amp;</span><span class=nx>nbsp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// class的绑定函数设置ref
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>saveInput</span> <span class=o>=</span> <span class=p>(</span><span class=nx>currentNode</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>this</span><span class=p>.</span><span class=nx>input2</span> <span class=o>=</span> <span class=nx>currentNode</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染虚拟dom到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Demo</span><span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=43createref使用>4.3、createRef使用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 创建组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>class</span> <span class=nx>Demo</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 但是该容器是专用的，只能放在一个标签上
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>myRef</span> <span class=o>=</span> <span class=nx>React</span><span class=p>.</span><span class=nx>createRef</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>showData</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>alert</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>myRef</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>input</span> <span class=na>ref</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>myRef</span><span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;点击按钮提示数据&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>showData</span><span class=p>}&gt;</span><span class=nx>点我提示左侧数据</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span><span class=o>&amp;</span><span class=nx>nbsp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染虚拟dom到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Demo</span><span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=5事件处理>5、事件处理</h2><ul><li>通过onXxx属性指定事件处理函数(注意大小写)<ul><li>React使用的是自定义(合成)事件, 而不是使用的原生DOM事件</li><li>React中的事件是通过事件委托方式处理的(委托给组件最外层的元素)</li></ul></li><li>通过event.target得到发生事件的DOM元素对象</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 创建组件
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kr>class</span> <span class=nx>Demo</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 创建ref容器
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>myRef</span> <span class=o>=</span> <span class=nx>React</span><span class=p>.</span><span class=nx>createRef</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>showData</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>alert</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>myRef</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>showData2</span> <span class=o>=</span> <span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>alert</span><span class=p>(</span><span class=nx>event</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>input</span> <span class=na>ref</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>myRef</span><span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;点击按钮提示数据&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>showData</span><span class=p>}&gt;</span><span class=nx>点我提示左侧数据</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span><span class=o>&amp;</span><span class=nx>nbsp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>input</span> <span class=na>onBlur</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>showData2</span><span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;失去焦点提示数据&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 2.渲染虚拟dom到页面
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Demo</span><span class=p>/&gt;,</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=6高阶函数与函数柯里化>6、高阶函数与函数柯里化</h2><ul><li>高阶函数：如果一个函数符合下面2个规范中的任何一个，那该函数就是高阶函数<ul><li>若A函数，接收的参数是一个函数，那么A就可以称之为高阶函数</li><li>若A函数，调用的返回值依然是一个函数，那么A就可以称之为高阶函数</li></ul></li><li>函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式</li></ul><hr><p><strong>用函数柯里化实现：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=nx>saveFormData</span> <span class=o>=</span> <span class=p>(</span><span class=nx>dataType</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>this</span><span class=p>.</span><span class=nx>setstate</span><span class=p>({[</span><span class=nx>dataType</span><span class=p>]</span><span class=o>:</span> <span class=nx>event</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>render</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>form</span> <span class=na>onSubmit</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>handleSubmit</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=nx>用户名</span><span class=err>：</span><span class=p>&lt;</span><span class=nt>input</span> <span class=na>onChange</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>saveFormData</span><span class=p>(</span><span class=s1>&#39;username&#39;</span><span class=p>)}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;username&#34;</span><span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=nx>密码</span><span class=err>：</span><span class=p>&lt;</span><span class=nt>input</span> <span class=na>onChange</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>saveFormData</span><span class=p>(</span><span class=s1>&#39;password&#39;</span><span class=p>)}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;password&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;password&#34;</span><span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>button</span><span class=p>&gt;</span><span class=nx>登录</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><hr><p><strong>不用函数柯里化实现：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=c1>//保存表单数据到状态中
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>saveFormData</span> <span class=o>=</span> <span class=p>(</span><span class=nx>dataType</span><span class=p>,</span><span class=nx>event</span><span class=p>)=&gt;{</span>
+</span></span><span class=line><span class=cl>	<span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({[</span><span class=nx>dataType</span><span class=p>]</span><span class=o>:</span><span class=nx>event</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>render</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>form</span> <span class=na>onSubmit</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>handleSubmit</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=nx>用户名</span><span class=err>：</span><span class=p>&lt;</span><span class=nt>input</span> <span class=na>onChange</span><span class=o>=</span><span class=p>{</span><span class=nx>event</span> <span class=p>=&gt;</span> <span class=k>this</span><span class=p>.</span><span class=nx>saveFormData</span><span class=p>(</span><span class=s1>&#39;username&#39;</span><span class=p>,</span><span class=nx>event</span><span class=p>)</span> <span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;username&#34;</span><span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=nx>密码</span><span class=err>：</span><span class=p>&lt;</span><span class=nt>input</span> <span class=na>onChange</span><span class=o>=</span><span class=p>{</span><span class=nx>event</span> <span class=p>=&gt;</span> <span class=k>this</span><span class=p>.</span><span class=nx>saveFormData</span><span class=p>(</span><span class=s1>&#39;password&#39;</span><span class=p>,</span><span class=nx>event</span><span class=p>)</span> <span class=p>}</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;password&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;password&#34;</span><span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>button</span><span class=p>&gt;</span><span class=nx>登录</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=7组件的生命周期>7、组件的生命周期</h2><h3 id=71生命周期流程图旧>7.1、生命周期流程图(旧)</h3><p><img src=https://i.loli.net/2021/08/18/Rqfck6LOXm7ClPa.png loading=lazy alt=生命周期流程图(旧)></p><ol><li><strong>初始化阶段</strong>: 由ReactDOM.render()触发&mdash;初次渲染<ol><li>constructor()</li><li>componentWillMount()</li><li>render()</li><li>componentDidMount()</li></ol></li><li><strong>更新阶段</strong>: 由组件内部this.setSate()或父组件重新render触发<ol><li>shouldComponentUpdate()</li><li>componentWillUpdate()</li><li>render()</li><li>componentDidUpdate()</li></ol></li><li><strong>卸载组件</strong>: 由ReactDOM.unmountComponentAtNode()触发<ol><li>componentWillUnmount()</li></ol></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/babel&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=cm>/* 
+</span></span></span><span class=line><span class=cl><span class=cm>		1. 初始化阶段: 由ReactDOM.render()触发---初次渲染
+</span></span></span><span class=line><span class=cl><span class=cm>							1.	constructor()
+</span></span></span><span class=line><span class=cl><span class=cm>							2.	componentWillMount()
+</span></span></span><span class=line><span class=cl><span class=cm>							3.	render()
+</span></span></span><span class=line><span class=cl><span class=cm>							4.	componentDidMount() =====&gt; 常用
+</span></span></span><span class=line><span class=cl><span class=cm>											一般在这个钩子中做一些初始化的事，例如：开启定时器、发送网络请求、订阅消息
+</span></span></span><span class=line><span class=cl><span class=cm>		2. 更新阶段: 由组件内部this.setSate()或父组件render触发
+</span></span></span><span class=line><span class=cl><span class=cm>							1.	shouldComponentUpdate()
+</span></span></span><span class=line><span class=cl><span class=cm>							2.	componentWillUpdate()
+</span></span></span><span class=line><span class=cl><span class=cm>							3.	render() =====&gt; 必须使用的一个
+</span></span></span><span class=line><span class=cl><span class=cm>							4.	componentDidUpdate()
+</span></span></span><span class=line><span class=cl><span class=cm>		3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
+</span></span></span><span class=line><span class=cl><span class=cm>							1.	componentWillUnmount()  =====&gt; 常用
+</span></span></span><span class=line><span class=cl><span class=cm>											一般在这个钩子中做一些收尾的事，例如：关闭定时器、取消订阅消息
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span><span class=line><span class=cl><span class=c1>//创建组件
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>class</span> <span class=nx>Count</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//构造器
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---constructor&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=c1>//初始化状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span><span class=nx>count</span><span class=o>:</span><span class=mi>0</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//加1按钮的回调
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>add</span> <span class=o>=</span> <span class=p>()=&gt;{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>//获取原状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=kr>const</span> <span class=p>{</span><span class=nx>count</span><span class=p>}</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>state</span>
+</span></span><span class=line><span class=cl>		<span class=c1>//更新状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span><span class=nx>count</span><span class=o>:</span><span class=nx>count</span><span class=o>+</span><span class=mi>1</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//卸载组件按钮的回调
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>death</span> <span class=o>=</span> <span class=p>()=&gt;{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>unmountComponentAtNode</span><span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//强制更新按钮的回调
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>force</span> <span class=o>=</span> <span class=p>()=&gt;{</span>
+</span></span><span class=line><span class=cl>		<span class=k>this</span><span class=p>.</span><span class=nx>forceUpdate</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件将要挂载的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentWillMount</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---componentWillMount&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件挂载完毕的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentDidMount</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---componentDidMount&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件将要卸载的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentWillUnmount</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---componentWillUnmount&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//控制组件更新的“阀门”
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>shouldComponentUpdate</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---shouldComponentUpdate&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件将要更新的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentWillUpdate</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---componentWillUpdate&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件更新完毕的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentDidUpdate</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---componentDidUpdate&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>render</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Count---render&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=kr>const</span> <span class=p>{</span><span class=nx>count</span><span class=p>}</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>state</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span><span class=nx>当前求和为</span><span class=err>：</span><span class=p>{</span><span class=nx>count</span><span class=p>}&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>add</span><span class=p>}&gt;</span><span class=nx>点我</span><span class=o>+</span><span class=mi>1</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>death</span><span class=p>}&gt;</span><span class=nx>卸载组件</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>force</span><span class=p>}&gt;</span><span class=nx>不更改任何状态中的数据</span><span class=err>，</span><span class=nx>强制更新一下</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//父组件A
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>class</span> <span class=nx>A</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>//初始化状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>state</span> <span class=o>=</span> <span class=p>{</span><span class=nx>carName</span><span class=o>:</span><span class=s1>&#39;奔驰&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>changeCar</span> <span class=o>=</span> <span class=p>()=&gt;{</span>
+</span></span><span class=line><span class=cl>		<span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span><span class=nx>carName</span><span class=o>:</span><span class=s1>&#39;奥拓&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>render</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span><span class=nx>我是A组件</span><span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>button</span> <span class=na>onClick</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>changeCar</span><span class=p>}&gt;</span><span class=nx>换车</span><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>B</span> <span class=na>carName</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>carName</span><span class=p>}/&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//子组件B
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>class</span> <span class=nx>B</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件将要接收新的props的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentWillReceiveProps</span><span class=p>(</span><span class=nx>props</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;B---componentWillReceiveProps&#39;</span><span class=p>,</span><span class=nx>props</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//控制组件更新的“阀门”
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>shouldComponentUpdate</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;B---shouldComponentUpdate&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件将要更新的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentWillUpdate</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;B---componentWillUpdate&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>//组件更新完毕的钩子
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>componentDidUpdate</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;B---componentDidUpdate&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>render</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>		<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;B---render&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span><span class=nx>我是B组件</span><span class=err>，</span><span class=nx>接收到的车是</span><span class=o>:</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>carName</span><span class=p>}&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//渲染组件
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>ReactDOM</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>Count</span><span class=p>/&gt;,</span><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s1>&#39;test&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=72生命周期流程图新17以后>7.2、生命周期流程图(新，17以后)</h3><p><img src=https://i.loli.net/2021/08/18/WEDTHxuCsdZM8QS.png loading=lazy alt=生命周期流程图></p><ol><li><strong>初始化阶段:</strong> 由ReactDOM.render()触发&mdash;初次渲染<ol><li>constructor()</li><li>getDerivedStateFromProps(props,state)：从props中得到派生的状态，也就是state的值在任何时候都取决于props时使用</li><li>render()</li><li>componentDidMount()</li></ol></li><li><strong>更新阶段</strong>: 由组件内部this.setSate()或父组件重新render触发<ol><li>getDerivedStateFromProps(props,state)：从props中得到派生的状态，也就是state的值在任何时候都取决于props时使用</li><li>shouldComponentUpdate()</li><li>render()</li><li>getSnapshotBeforeUpdate</li><li>componentDidUpdate(preProps, preState)：preProps和preState都是更新前的数据</li></ol></li><li><strong>卸载组件</strong>: 由ReactDOM.unmountComponentAtNode()触发<ol><li>componentWillUnmount()</li></ol></li></ol><hr><ul><li>若state的值在任何时候都取决于props，那么可以使用getDerivedStateFromProps</li><li><code>getSnapshotBeforeUpdate(prevProps, prevState)</code> 在最近一次渲染输出（提交到 DOM 节点）之前调用。它使得组件能在发生更改之前从 DOM 中捕获一些信息（例如，滚动位置）。<strong>此生命周期方法的任何返回值将作为参数传递给 componentDidUpdate()</strong></li></ul><h3 id=73重要的勾子>7.3、重要的勾子</h3><ul><li>render：初始化渲染或更新渲染调用</li><li>componentDidMount：开启监听, 发送ajax请求</li><li>componentWillUnmount：做一些收尾工作, 如: 清理定时器</li></ul><h3 id=74即将废弃的勾子>7.4、即将废弃的勾子</h3><ul><li>componentWillMount</li><li>componentWillReceiveProps</li><li>componentWillUpdate</li></ul><h2 id=8虚拟dom与dom-diffing算法>8、虚拟DOM与DOM Diffing算法</h2><p><img src=https://i.loli.net/2021/08/18/KUwNg9cW3IoQxXs.png loading=lazy alt="虚拟DOM与DOM Diffing算法"></p></section><footer class=article-footer><section class=article-tags><a href=/tags/react/>React</a>
+<a href=/tags/%E5%89%8D%E7%AB%AF/>前端</a>
+<a href=/tags/state/>State</a>
+<a href=/tags/setstate/>SetState</a>
+<a href=/tags/props/>Props</a>
+<a href=/tags/refs/>Refs</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><footer class=site-footer><section class=copyright>&copy;
+2019 -
+2024 Wk's Blog</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.26.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

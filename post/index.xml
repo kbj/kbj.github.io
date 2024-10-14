@@ -1,4 +1,103 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Wk's Blog</title><link>https://blog.wk.mk/post/</link><description>Recent content in Posts on Wk's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 18 Aug 2021 23:25:00 +0800</lastBuildDate><atom:link href="https://blog.wk.mk/post/index.xml" rel="self" type="application/rss+xml"/><item><title>React学习笔记（一）- 面向组件编程</title><link>https://blog.wk.mk/p/react-1/</link><pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate><guid>https://blog.wk.mk/p/react-1/</guid><description>&lt;img src="https://blog.wk.mk/p/react-1/cover.jpg" alt="Featured image of post React学习笔记（一）- 面向组件编程" />&lt;h2 id="1基本理解和使用">1、基本理解和使用
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Wk's Blog</title><link>https://blog.wk.mk/post/</link><description>Recent content in Posts on Wk's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 15 Oct 2024 00:01:00 +0800</lastBuildDate><atom:link href="https://blog.wk.mk/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Gost使用加密隧道转发数据</title><link>https://blog.wk.mk/p/gost-forward/</link><pubDate>Tue, 15 Oct 2024 00:01:00 +0800</pubDate><guid>https://blog.wk.mk/p/gost-forward/</guid><description>&lt;img src="https://unsplash.it/1600/900?random" alt="Featured image of post Gost使用加密隧道转发数据" />&lt;h1 id="需求">需求
+&lt;/h1>&lt;ul>
+&lt;li>有两台机器A与B，需要都能访问 &lt;code>x.x.x.x:xx&lt;/code> 地址。其中B机器能直接访问，A机器只能与B机器连通，无法访问 &lt;code>x.x.x.x:xx&lt;/code> 地址。因此需要用Gost搭建端口转发，实现A访问B的特定端口，B再往&lt;code>x.x.x.x:xx&lt;/code> 地址发送请求&lt;/li>
+&lt;li>为了隐私与安全性考量，B的特定端口需要有权限校验，防止任何人都能访问&lt;/li>
+&lt;/ul>
+&lt;h1 id="准备工作">准备工作
+&lt;/h1>&lt;ol>
+&lt;li>到&lt;a class="link" href="https://github.com/go-gost/gost/releases" target="_blank" rel="noopener"
+>这里&lt;/a>下载最新版Gost到A、B两台机器上&lt;/li>
+&lt;li>将可执行文件放入 &lt;code>/usr/local/bin/gost&lt;/code> 路径下&lt;/li>
+&lt;/ol>
+&lt;h1 id="b机器配置">B机器配置
+&lt;/h1>&lt;h2 id="具体写法">具体写法
+&lt;/h2>&lt;p>使用 &lt;code>relay+tls&lt;/code>模式监听本地8888端口，并将接收到的数据解密后发送到 &lt;code>x.x.x.x:xx&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">/usr/local/bin/gost -L&lt;span class="o">=&lt;/span>relay+tls://user:pwd@:8888/0:0 -F&lt;span class="o">=&lt;/span>forward+tcp://x.x.x.x:xx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="持续化运行">持续化运行
+&lt;/h2>&lt;p>需要编写systemd配置信息将Gost放入systemd运行维护，创建 &lt;code>/etc/systemd/system/gost.service&lt;/code> 文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[Unit]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Description=GO Simple Tunnel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">After=network.target
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Wants=network.target
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Service]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Type=simple
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ExecStart=/usr/local/bin/gost -L=relay+tls://user:pwd@:8888/0:0 -F=forward+tcp://x.x.x.x:xx
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart=always
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Install]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WantedBy=multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>执行：&lt;code>systemctl daemon-reload &amp;amp;&amp;amp; systemctl enable gost &amp;amp;&amp;amp; systemctl start gost&lt;/code> 即可实现启动Gost并开机自启&lt;/p>
+&lt;h1 id="a机器配置">A机器配置
+&lt;/h1>&lt;p>需要在本地监听一个端口（例如9999），使用与B机器相同配置的加密模式后转发到B机器的8888端口，A机器上访问 &lt;code>127.0.0.1:9999&lt;/code> 即会被Gost转发到B机器后再转发到 &lt;code>x.x.x.x:xx&lt;/code> 地址&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">/usr/local/bin/gost -L&lt;span class="o">=&lt;/span>tcp://:9999/0:0 -F&lt;span class="o">=&lt;/span>relay+tls://user:pwd@B_address:8888/0:0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="持续化运行-1">持续化运行
+&lt;/h2>&lt;p>需要编写systemd配置信息将Gost放入systemd运行维护，创建 &lt;code>/etc/systemd/system/gost.service&lt;/code> 文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[Unit]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Description=GO Simple Tunnel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">After=network.target
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Wants=network.target
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Service]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Type=simple
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ExecStart=/usr/local/bin/gost -L=tcp://:9999/0:0 -F=relay+tls://user:pwd@B_address:8888/0:0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart=always
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Install]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WantedBy=multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>执行：&lt;code>systemctl daemon-reload &amp;amp;&amp;amp; systemctl enable gost &amp;amp;&amp;amp; systemctl start gost&lt;/code> 即可实现启动Gost并开机自启&lt;/p>
+&lt;h1 id="效果">效果
+&lt;/h1>&lt;p>A机器上访问 &lt;code>127.0.0.1:9999&lt;/code> 地址，数据就会通过Gost的加密隧道到达B机器，再由B机器转发到 &lt;code>x.x.x.x:xx&lt;/code> 地址&lt;/p></description></item><item><title>React学习笔记（一）- 面向组件编程</title><link>https://blog.wk.mk/p/react-1/</link><pubDate>Wed, 18 Aug 2021 23:25:00 +0800</pubDate><guid>https://blog.wk.mk/p/react-1/</guid><description>&lt;img src="https://blog.wk.mk/p/react-1/cover.jpg" alt="Featured image of post React学习笔记（一）- 面向组件编程" />&lt;h2 id="1基本理解和使用">1、基本理解和使用
 &lt;/h2>&lt;h3 id="函数式组件">函数式组件
 &lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">

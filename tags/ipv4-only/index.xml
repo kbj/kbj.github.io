@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ipv4 Only on Wk's Blog</title><link>https://blog.wk.mk/tags/ipv4-only/</link><description>Recent content in Ipv4 Only on Wk's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 11 Dec 2024 20:00:00 +0800</lastBuildDate><atom:link href="https://blog.wk.mk/tags/ipv4-only/index.xml" rel="self" type="application/rss+xml"/><item><title>为Transmission设置Ipv6 Only做种</title><link>https://blog.wk.mk/p/transmission-ipv6-only/</link><pubDate>Wed, 11 Dec 2024 20:00:00 +0800</pubDate><guid>https://blog.wk.mk/p/transmission-ipv6-only/</guid><description>&lt;img src="https://pic.2ge.org/randimg/fengjing/" alt="Featured image of post 为Transmission设置Ipv6 Only做种" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>默认情况下，Transmission是同时监听IPV4和IPV6网络来实现BT/PT下载的。
+现在遇到了一种使用场景是一台IPV6 Only的服务器使用Transmission来PT保种，同时因为其他业务需要，另外安装了Cloudflare Warp，使服务器同时拥有IPV4与IPV6的网络出口。按照PT的规则，Warp的IP是不可以作为PT做种使用的，因此现在需要让Transmission仅使用IPV6。查看了Transmission的Web端设置，并没有这方面可供修改。因此记录一下通过修改配置文件来实现上述目的的方法。&lt;/p>
+&lt;h2 id="具体操作">具体操作
+&lt;/h2>&lt;ol>
+&lt;li>找到Transmission的配置目录，打开 &lt;code>settings.json&lt;/code> 文件&lt;/li>
+&lt;li>找到其中 &lt;code>bind-address-ipv4&lt;/code> 配置的位置，默认是：&lt;code>0.0.0.0&lt;/code>。因为现在的需求是禁用掉IPV4监听，所以把这个&lt;code>0.0.0.0&lt;/code>改成一个不存在的本地地址即可，比如 &lt;code>127.0.0.10&lt;/code>
+&lt;ul>
+&lt;li>如果要禁用IPV6的话，则是修改 &lt;code>bind-address-ipv6&lt;/code> 配置，默认是：&lt;code>::&lt;/code> ，比如可以修改为： &lt;code>::10&lt;/code>等&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>保存修改&lt;/li>
+&lt;li>重启Transmission，即可实现单栈网络监听&lt;/li>
+&lt;/ol></description></item></channel></rss>
